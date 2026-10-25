@@ -35,7 +35,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.locks.LockSupport;
 import net.elytrium.fastmotd.utils.ByteBufCopyThreadLocal;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.junit.jupiter.api.Test;
 
 class MOTDBytesHolderConcurrencyTest {
@@ -139,7 +139,7 @@ class MOTDBytesHolderConcurrencyTest {
   }
 
   private static MOTDBytesHolder newHolder() {
-    return new MOTDBytesHolder(LegacyComponentSerializer.legacySection(), "{\"text\":\"fixture\"}",
+    return new MOTDBytesHolder(MiniMessage.miniMessage(), "{\"text\":\"fixture\"}",
         Component.text("fixture"), "test", null, List.of());
   }
 
