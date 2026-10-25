@@ -41,6 +41,7 @@ public class MOTDBytesHolder {
   private final int protocolDigit;
   private ByteBufCopyThreadLocal localByteBuf;
   private ServerPing compatPingInfo;
+  private boolean disposed;
 
   public MOTDBytesHolder(ComponentSerializer<Component, Component, String> inputSerializer, String descriptionJson,
                          Component description, String name, String favicon, List<String> information) {
@@ -111,7 +112,7 @@ public class MOTDBytesHolder {
     this.compatPingInfo = compatServerPingBuilder.build();
   }
 
-  public void replaceOnline(int max, int online) {
+  public synchronized void replaceOnline(int max, int online) {
     this.localReplaceOnline(this.maxOnlineDigit, max);
     this.localReplaceOnline(this.onlineDigit, online);
 
@@ -136,7 +137,7 @@ public class MOTDBytesHolder {
     this.byteBuf.setByte(digit + 7, (to % 10) + '0');
   }
 
-  public ServerPing getCompatPingInfo(ProtocolVersion version, boolean replaceProtocol) {
+  public synchronized ServerPing getCompatPingInfo(ProtocolVersion version, boolean replaceProtocol) {
     if (replaceProtocol) {
       return this.compatPingInfo.asBuilder()
           .version(new ServerPing.Version(version.getProtocol(), this.compatPingInfo.getVersion().getName()))
@@ -146,7 +147,8 @@ public class MOTDBytesHolder {
     }
   }
 
-  public ByteBuf getByteBuf(ProtocolVersion version, boolean replaceProtocol) {
+  public synchronized ByteBuf getByteBuf(ProtocolVersion version, boolean replaceProtocol) {
+    // Keep acquisition and retain in the same critical section as pool replacement.
     ByteBuf buf = this.localByteBuf.get();
 
     if (replaceProtocol) {
@@ -172,7 +174,12 @@ public class MOTDBytesHolder {
     return LegacyComponentSerializer.legacySection().serialize(this.inputSerializer.deserialize(from));
   }
 
-  public void dispose() {
+  public synchronized void dispose() {
+    if (this.disposed) {
+      return;
+    }
+    this.disposed = true;
+
     if (this.byteBuf.refCnt() != 0) {
       this.byteBuf.release();
     }

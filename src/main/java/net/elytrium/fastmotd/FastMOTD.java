@@ -142,7 +142,7 @@ public class FastMOTD {
     this.reload();
   }
 
-  public void reload() {
+  public synchronized void reload() {
     Settings.IMP.reload(this.configPath);
 
     if (Settings.IMP.MAIN.ENABLE_UPDATES) {
@@ -359,7 +359,7 @@ public class FastMOTD {
     });
   }
 
-  private void updateMOTD() {
+  private synchronized void updateMOTD() {
     int online = this.getOnline();
     int max = this.getMax(online);
 
@@ -404,7 +404,7 @@ public class FastMOTD {
     return max;
   }
 
-  public ByteBuf getNext(ProtocolVersion version, String serverAddress) {
+  public synchronized ByteBuf getNext(ProtocolVersion version, String serverAddress) {
     if (Settings.IMP.MAINTENANCE.MAINTENANCE_ENABLED) {
       return this.domainMaintenanceMOTD.getOrDefault(serverAddress, this.maintenanceMOTDGenerators.get(
               this.maintenanceProtocolPointers.getOrDefault(version.getProtocol(), 0)))
@@ -416,7 +416,7 @@ public class FastMOTD {
     }
   }
 
-  public ServerPing getNextCompat(ProtocolVersion version, String serverAddress) {
+  public synchronized ServerPing getNextCompat(ProtocolVersion version, String serverAddress) {
     if (Settings.IMP.MAINTENANCE.MAINTENANCE_ENABLED) {
       return this.domainMaintenanceMOTD.getOrDefault(serverAddress, this.maintenanceMOTDGenerators.get(
               this.maintenanceProtocolPointers.getOrDefault(version.getProtocol(), 0)))
