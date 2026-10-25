@@ -9,7 +9,7 @@ plugins {
 }
 
 setGroup("net.elytrium")
-setVersion("1.0.10")
+setVersion("1.0.10-box.1")
 
 java {
     setSourceCompatibility(JavaVersion.VERSION_21)
@@ -18,6 +18,16 @@ java {
 
 compileJava {
     getOptions().setEncoding("UTF-8")
+}
+
+// Newer Velocity builds are compiled for Java 25: -PcompilerVersion=25 lets javac read them while still targeting 21
+if (project.hasProperty("compilerVersion")) {
+    tasks.withType(JavaCompile).configureEach {
+        javaCompiler = javaToolchains.compilerFor {
+            languageVersion = JavaLanguageVersion.of(project.property("compilerVersion") as int)
+        }
+        getOptions().getRelease().set(21)
+    }
 }
 
 repositories {
@@ -40,9 +50,15 @@ dependencies {
     implementation("net.elytrium:fastprepare:1.0.13")
     implementation("net.elytrium:serializer:1.1.1")
     implementation("it.unimi.dsi:fastutil-core:8.5.18")
-    compileOnly("com.velocitypowered:velocity-api:3.5.0-SNAPSHOT")
+    // -PvelocityJar=/path/to/velocity.jar compiles against the exact proxy build (needs Adventure with ObjectComponent)
+    if (project.hasProperty("velocityJar")) {
+        compileOnly(files(project.property("velocityJar")))
+        compileOnly("org.jetbrains:annotations:26.0.2")
+    } else {
+        compileOnly("com.velocitypowered:velocity-api:3.5.0-SNAPSHOT")
+        compileOnly("com.velocitypowered:velocity-proxy:3.5.0-SNAPSHOT")
+    }
     annotationProcessor("com.velocitypowered:velocity-api:3.5.0-SNAPSHOT")
-    compileOnly("com.velocitypowered:velocity-proxy:3.5.0-SNAPSHOT")
     compileOnly("com.github.spotbugs:spotbugs-annotations:4.9.8")
 
     compileOnly("io.netty:netty-codec:4.2.10.Final")

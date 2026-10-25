@@ -57,6 +57,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import net.elytrium.commons.kyori.serialization.Serializers;
 import net.elytrium.commons.utils.reflection.ReflectionException;
 import net.elytrium.commons.utils.updates.UpdatesChecker;
 import net.elytrium.fastmotd.command.MaintenanceCommand;
@@ -65,6 +66,7 @@ import net.elytrium.fastmotd.injection.ServerChannelInitializerHook;
 import net.elytrium.fastmotd.listener.CompatPingListener;
 import net.elytrium.fastmotd.listener.ShutdownOnZeroPlayersListener;
 import net.elytrium.fastmotd.utils.MOTDGenerator;
+import net.elytrium.fastmotd.utils.ObjectComponents;
 import net.elytrium.fastprepare.PreparedPacket;
 import net.elytrium.fastprepare.PreparedPacketFactory;
 import net.kyori.adventure.text.Component;
@@ -155,7 +157,9 @@ public class FastMOTD {
     }
     this.metricsFactory.make(this, 15640);
 
-    ComponentSerializer<Component, Component, String> serializer = Settings.IMP.SERIALIZER.getSerializer();
+    ComponentSerializer<Component, Component, String> serializer = Settings.IMP.SERIALIZER == Serializers.MINIMESSAGE
+        ? ObjectComponents.miniMessage()
+        : Settings.IMP.SERIALIZER.getSerializer();
     if (serializer == null) {
       this.logger.error("Incorrect serializer set: {}", Settings.IMP.SERIALIZER);
       return;
@@ -215,13 +219,13 @@ public class FastMOTD {
     this.generateMOTDGenerators(serializer, Settings.IMP.MAIN.VERSION_NAME, Settings.IMP.MAIN.DESCRIPTIONS,
             Settings.IMP.MAIN.FAVICONS, Settings.IMP.MAIN.INFORMATION, this.motdGenerators, this.protocolPointers,
             Settings.IMP.MAIN.VERSIONS.DESCRIPTIONS, Settings.IMP.MAIN.VERSIONS.FAVICONS, Settings.IMP.MAIN.VERSIONS.INFORMATION,
-            Settings.IMP.MAIN.DOMAINS, this.domainMOTD);
+            Settings.IMP.MAIN.TIERS, Settings.IMP.MAIN.DOMAINS, this.domainMOTD);
 
     this.generateMOTDGenerators(serializer, Settings.IMP.MAINTENANCE.VERSION_NAME, Settings.IMP.MAINTENANCE.DESCRIPTIONS,
             Settings.IMP.MAINTENANCE.FAVICONS, Settings.IMP.MAINTENANCE.INFORMATION, this.maintenanceMOTDGenerators,
             this.maintenanceProtocolPointers, Settings.IMP.MAINTENANCE.VERSIONS.DESCRIPTIONS,
             Settings.IMP.MAINTENANCE.VERSIONS.FAVICONS, Settings.IMP.MAINTENANCE.VERSIONS.INFORMATION,
-            Settings.IMP.MAINTENANCE.DOMAINS, this.domainMaintenanceMOTD);
+            null, Settings.IMP.MAINTENANCE.DOMAINS, this.domainMaintenanceMOTD);
 
     this.updater = this.server.getScheduler()
         .buildTask(this, this::updateMOTD)
@@ -234,7 +238,8 @@ public class FastMOTD {
           String versionName, List<String> defaultDescriptions, List<String> defaultFavicons,
           List<String> defaultInformation, List<MOTDGenerator> dest, Int2IntMap destPointers,
           Map<String, List<String>> descriptionVersions, Map<String, List<String>> faviconVersions,
-          Map<String, List<String>> informationVersions, Map<String, Settings.DOMAIN_MOTD_NODE> domainMotd,
+          Map<String, List<String>> informationVersions, Map<String, Settings.TIER_NODE> tiers,
+          Map<String, Settings.DOMAIN_MOTD_NODE> domainMotd,
           Map<String, MOTDGenerator> domainDest) {
     descriptionVersions = Objects.requireNonNullElseGet(descriptionVersions, HashMap::new);
     faviconVersions = Objects.requireNonNullElseGet(faviconVersions, HashMap::new);
@@ -283,12 +288,62 @@ public class FastMOTD {
       identical.forEach(p -> destPointers.put(p, idx));
     });
 
+    if (tiers != null) {
+      IntSet claimed = new IntOpenHashSet();
+      tiers.forEach((tierName, tier) -> {
+        if (tier.PROTOCOLS == null || tier.PROTOCOLS.isBlank() || tier.PROTOCOLS.trim().equalsIgnoreCase("off")) {
+          return;
+        }
+
+        IntSet protocols = new IntOpenHashSet();
+        this.parseProtocols(tier.PROTOCOLS).forEach(protocol -> {
+          if (claimed.add(protocol)) {
+            protocols.add(protocol);
+          }
+        });
+
+        if (protocols.isEmpty()) {
+          this.logger.warn("MOTD tier {} ({}) matches no protocols not taken by tiers above", tierName, tier.PROTOCOLS);
+          return;
+        }
+
+        final int idx = dest.size();
+        MOTDGenerator motdGenerator = new MOTDGenerator(this, serializer, versionName,
+                orDefault(tier.DESCRIPTIONS, nonNullDefaultDescriptions),
+                orDefault(tier.FAVICONS, nonNullDefaultFavicons),
+                orDefault(tier.INFORMATION, nonNullDefaultInformation));
+        motdGenerator.generate();
+        dest.add(motdGenerator);
+        protocols.forEach(p -> destPointers.put(p, idx));
+        this.logger.info("MOTD tier {}: protocols {}", tierName, tier.PROTOCOLS);
+      });
+    }
+
     domainMotd.forEach((domain, motdNode) -> {
       MOTDGenerator motdGenerator = new MOTDGenerator(this, serializer, versionName,
               motdNode.DESCRIPTION, motdNode.FAVICON, motdNode.INFORMATION);
       motdGenerator.generate();
       domainDest.put(domain, motdGenerator);
     });
+  }
+
+  private static List<String> orDefault(List<String> value, List<String> def) {
+    return value == null || value.isEmpty() ? def : value;
+  }
+
+  private IntStream parseProtocols(String spec) {
+    String key = spec.trim();
+    int max = ProtocolVersion.MAXIMUM_VERSION.getProtocol();
+    if (key.endsWith("+")) {
+      return IntStream.rangeClosed(Integer.parseInt(key.substring(0, key.length() - 1).trim()), max);
+    } else if (key.startsWith("-")) {
+      return IntStream.rangeClosed(0, Integer.parseInt(key.substring(1).trim()));
+    } else if (key.contains("-")) {
+      String[] parts = key.split("-");
+      return IntStream.rangeClosed(Integer.parseInt(parts[0].trim()), Integer.parseInt(parts[1].trim()));
+    } else {
+      return IntStream.of(Integer.parseInt(key));
+    }
   }
 
   private void sortByProtocolVersion(Map<String, List<String>> src, Int2ObjectMap<List<String>> dest) {

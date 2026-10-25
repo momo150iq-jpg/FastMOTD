@@ -30,7 +30,6 @@ import java.util.UUID;
 import net.elytrium.fastmotd.utils.ByteBufCopyThreadLocal;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.ComponentSerializer;
-import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 
 public class MOTDBytesHolder {
@@ -43,8 +42,8 @@ public class MOTDBytesHolder {
   private ByteBufCopyThreadLocal localByteBuf;
   private ServerPing compatPingInfo;
 
-  public MOTDBytesHolder(ComponentSerializer<Component, Component, String> inputSerializer, GsonComponentSerializer outputSerializer,
-                         String name, Component description, String favicon, List<String> information) {
+  public MOTDBytesHolder(ComponentSerializer<Component, Component, String> inputSerializer, String descriptionJson,
+                         Component description, String name, String favicon, List<String> information) {
     this.inputSerializer = inputSerializer;
     ServerPing.Builder compatServerPingBuilder = ServerPing.builder();
 
@@ -74,7 +73,7 @@ public class MOTDBytesHolder {
     }
 
     motd.append("]},\"description\":")
-        .append(outputSerializer.serialize(description))
+        .append(descriptionJson)
         .append(",\"version\":{\"name\":\"")
         .append(name)
         .append("\",\"protocol\":        1}");

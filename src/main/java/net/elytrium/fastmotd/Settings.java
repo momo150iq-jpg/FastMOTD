@@ -17,6 +17,7 @@
 
 package net.elytrium.fastmotd;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import net.elytrium.commons.kyori.serialization.Serializers;
@@ -91,7 +92,26 @@ public class Settings extends YamlSerializable {
       public Map<String, List<String>> INFORMATION = Map.of("757-758", List.of("Your", "protocol", "version", "is 757 or 758"));
     }
 
+    @Comment({
+        @CommentValue("MOTD tiers by client protocol (handshake protocol version), checked top to bottom, first match wins."),
+        @CommentValue("protocols: \"773+\" (and newer), \"769-772\" (range), \"-768\" (and older), \"47\" (single), \"off\" (tier disabled)."),
+        @CommentValue("Empty descriptions/favicons/information = use the ones from main. Tiers override 'versions' above."),
+        @CommentValue("Objects work on 1.21.9+ (773): <sprite:items:item/diamond_sword>, <sprite:gui:hud/heart/full>, <sprite:block/tnt_side>,"),
+        @CommentValue("<head:Nick> / <head:Nick:false> (no hat). Only vanilla atlases/fonts: the server resource pack is not loaded in the server list."),
+        @CommentValue("items atlas is rewritten to blocks for 1.21.9-1.21.10, objects are dropped for clients below 1.21.9."),
+        @CommentValue("{} = disabled"),
+    })
+    public Map<String, TIER_NODE> TIERS = new LinkedHashMap<>(Map.of("modern", new TIER_NODE()));
+
     public Map<String, DOMAIN_MOTD_NODE> DOMAINS = Map.of("example.com:25565", new DOMAIN_MOTD_NODE());
+  }
+
+  public static class TIER_NODE {
+
+    public String PROTOCOLS = "773+";
+    public List<String> DESCRIPTIONS = List.of("<sprite:items:item/diamond_sword> <bold><red>FastMOTD</red></bold> <head:Notch>{NL} -> 1.21.9+");
+    public List<String> FAVICONS = List.of();
+    public List<String> INFORMATION = List.of();
   }
 
   public MAINTENANCE MAINTENANCE = new MAINTENANCE();

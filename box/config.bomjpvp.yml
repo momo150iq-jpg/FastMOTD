@@ -1,0 +1,160 @@
+version: "1.0.10-box.1"
+#Available serializers:
+#LEGACY_AMPERSAND - "&c&lExample &c&9Text".
+#LEGACY_SECTION - "§c§lExample §c§9Text".
+#MINIMESSAGE - "<bold><red>Example</red> <blue>Text</blue></bold>". (https://webui.adventure.kyori.net/)
+#GSON - "[{"text":"Example","bold":true,"color":"red"},{"text":" ","bold":true},{"text":"Text","bold":true,"color":"blue"}]". (https://minecraft.tools/en/json_text.php/)
+#GSON_COLOR_DOWNSAMPLING - Same as GSON, but uses downsampling.
+serializer: MINIMESSAGE
+main:
+  enable-updates: false
+  version-name: "Homeless"
+  descriptions:
+    - "      <gold>☠<bold> </bold><#ff3056><bold>BOMJ<#DDDDDD>PVP</bold> <gold>☠ <bold> </bold><dark_gray>       « <gradient:#8CF65F:#47FF79>АДСКАЯ ДРА4ИЛЬНЯ</gradient> <dark_gray>»{NL}  <#ff4747><bold>BOXPVP БЫЛ ВАЙП!</bold>     <#ff4747>☄ <#B8FA36>КАЧАUСЯ МАЧИ ЛОХОВ <#ff4747>☄"
+    - "      <gold>🔥<bold> </bold><#ff3056><bold>BOMJ<#DDDDDD>PVP</bold> <gold>🔥 <bold> </bold><dark_gray>         « <gradient:#26CF46:#49C42F>АДСКАЯ ДРА4ИЛЬНЯ</gradient> <dark_gray>»{NL}  <#2bff4f><bold>BOXPVP БЫЛ ВАЙП!</bold>     <#2bff4f>💣 <#74FF8E>КАЧАUСЯ МАЧИ ПЕТУШКОВ <#2bff4f>💣"
+    - "      <gold>☠<bold> </bold><#ff3056><bold>BOMJ<#DDDDDD>PVP</bold> <gold>☠ <bold> </bold><dark_gray>     <bold> </bold> « <gradient:#FFCA9F:#FCB3AF>АДСКАЯ ДРА4ИЛЬНЯ</gradient> <dark_gray>»{NL}  <#ffaa2b><bold>BOXPVP БЫЛ ВАЙП!</bold> <#ffaa2b>⛏ <#FF763F>КАЧАUСЯ МАЧИ БОМЖЕИ <#ffaa2b>⛏"
+    - "      <gold>🔥<bold> </bold><#ff3056><bold>BOMJ<#DDDDDD>PVP</bold> <gold>🔥 <bold> </bold><dark_gray>        « <gradient:#FCF4E7:#C4E5FF>АДСКАЯ ДРА4ИЛЬНЯ</gradient> <dark_gray>»{NL}  <#2bd8ff><bold>BOXPVP БЫЛ ВАЙП!</bold>    <#2bd8ff>🗡 <#A9D0EF>КАЧАUСЯ МАЧИ ЧИТЕРОВ <#2bd8ff>🗡"
+  favicons:
+    - "server-icon.png"
+    - "troll2.png"
+    - "troll3.png"
+    - "troll4.png"
+  information:
+    - ""
+    - "                             <red><bold>BOMJ<white>PVP</bold>  "
+    - ""
+    - "  <white>Проклятый сервер с бомжами где можно е6ать mамaш,  "
+    - "       <white>прокачиваться и не быть чмошной обиженкой  "
+    - ""
+    - "                <red>telegram.me/BomjPvPtop   BomjPvP.shop  "
+    - "                       <gray>о===============3"
+    - ""
+  #How frequently online player count will be updated (in ms)
+  update-rate: 3000
+  #VARIABLE - from max-count parameter
+  #ADD_SOME - will add up the number from max-count parameter to current online players amount
+  max-count-type: VARIABLE
+  max-count: 4444
+  fake-online-add-single: 0
+  fake-online-add-percent: 100
+  #Accepted values: from 0.0 to 1.0.
+  #Keep this value as low as possible
+  #Set -1 to disable PNG recompression
+  png-quality: 0.0
+  #Write packets outside of Netty pipeline to avoid plugins that modify packets (e.g. PacketEvents)
+  direct-write: false
+  log-pings: false
+  log-improper-pings: false
+  #Enabling this will allow non-vanilla ping packets sequence,
+  #but will open your server to nullping attacks
+  allow-improper-pings: false
+  #Separate MOTDs/favicons/information for different protocol versions
+  #See https://wiki.vg/Protocol_version_numbers
+  versions:
+    #{} = disabled
+    descriptions:
+      757-759:
+        - "      <gold>🔥<bold> </bold><#ff3056><bold>BOMJ<#DDDDDD>PVP</bold> <gold>🔥 <bold> </bold><dark_gray>« <gradient:#8e47ff:#47d4ff>Ивенты Прокачка ЛакиБлоки</gradient> <dark_gray>»{NL}  <#ff4747><bold><u>B</bold><u>O<bold>XPVP БЫЛ ВАЙП!</u>        <#D56CFC>☄ <#ff52ee>BoxPVP сервер <#D56CFC>☄"
+    #{} = disabled
+    favicons:
+      756-758:
+        - "troll.png"
+    #{} = disabled
+    information:
+      757-758:
+        - "Это"
+        - "<bold>лучший сервер</bold>"
+        - "<gradient:green:red>сделанный когда-либо</gradient>"
+        - "поверь мне"
+  #MOTD tiers by client protocol (handshake protocol version), checked top to bottom, first match wins.
+  #protocols: "773+" (and newer), "769-772" (range), "-768" (and older), "47" (single), "off" (tier disabled).
+  #Empty descriptions/favicons/information = use the ones from main. Tiers override 'versions' above.
+  #Objects work on 1.21.9+ (773): <sprite:items:item/diamond_sword>, <sprite:gui:hud/heart/full>, <sprite:block/tnt_side>,
+  #<head:Nick> / <head:Nick:false> (no hat). Only vanilla atlases/fonts: the server resource pack is not loaded in the server list.
+  #items atlas is rewritten to blocks for 1.21.9-1.21.10, objects are dropped for clients below 1.21.9.
+  #{} = disabled
+  tiers:
+    pretty:
+      protocols: "773+"
+      descriptions:
+        - "      <sprite:items:item/diamond_sword> <bold><gradient:#ff3056:#ff9a3d>BOMJ</gradient><gradient:#ffffff:#9aa0a6>PVP</gradient></bold> <sprite:items:item/diamond_sword> <dark_gray>«</dark_gray> <shadow:#1d4d00:1><gradient:#8CF65F:#47FF79>БОМЖ-ГОРОД</gradient></shadow> <dark_gray>»</dark_gray>{NL}  <sprite:gui:hud/heart/hardcore_full> <#ff4747><bold>BOXPVP</bold> <sprite:block/tnt_side> <gradient:#B8FA36:#47d4ff>кланы · ивенты · лаки-блоки</gradient> <sprite:items:item/totem_of_undying>"
+      favicons: []
+      information: []
+    pretty_bomj:
+      protocols: "off"
+      descriptions:
+        - "      <sprite:items:item/glass_bottle> <bold><gradient:#ff3056:#ff9a3d>BOMJ</gradient><gradient:#ffffff:#9aa0a6>PVP</gradient></bold> <sprite:items:item/rotten_flesh> <dark_gray>«</dark_gray> <font:uniform><#FFCA9F>город бомжей</font> <dark_gray>»</dark_gray>{NL}  <sprite:items:item/bread> <#ffaa2b><bold>BOXPVP</bold> <#FF763F>КАЧАUСЯ · МАЧИ ЛОХОВ · ДЕРЖИ РАЙОН <sprite:items:item/stick>"
+      favicons: []
+      information: []
+    pretty_lucky:
+      protocols: "off"
+      descriptions:
+        - "      <sprite:block/gold_block> <bold><gradient:#ff3056:#ff9a3d>BOMJ</gradient><gradient:#ffffff:#9aa0a6>PVP</gradient></bold> <sprite:block/gold_block> <dark_gray>«</dark_gray> <shadow:#5a3c00:1><gradient:#FFE259:#FFA751>ЛАКИ-БЛОКИ</gradient></shadow> <dark_gray>»</dark_gray>{NL}  <sprite:items:item/golden_apple> <#ffd84d>Ивент идёт!</#ffd84d> <gray>Ломай блоки — лови</gray> <sprite:items:item/emerald> <sprite:items:item/diamond> <sprite:items:item/nether_star>"
+      favicons: []
+      information: []
+    smooth:
+      protocols: "769-772"
+      descriptions:
+        - "      <gold>☠</gold> <bold><gradient:#ff3056:#ff9a3d>BOMJ</gradient><gradient:#ffffff:#9aa0a6>PVP</gradient></bold> <gold>☠</gold> <dark_gray>«</dark_gray> <shadow:#1d4d00:1><gradient:#8CF65F:#47FF79>БОМЖ-ГОРОД</gradient></shadow> <dark_gray>»</dark_gray>{NL}  <shadow:#4d0000:1><#ff4747><bold>BOXPVP</bold></shadow> <#ff4747>☄</#ff4747> <font:uniform><gradient:#B8FA36:#47d4ff>кланы · ивенты · лаки-блоки</gradient></font> <#ff4747>☄"
+      favicons: []
+      information: []
+  domains:
+    example.com:25565:
+      description:
+        - "Description for example.com"
+      favicon:
+        - "troll.png"
+      information:
+        - "Information for example.com"
+maintenance:
+  maintenance-enabled: false
+  show-version: true
+  should-kick-on-join: true
+  kick-whitelist:
+    - "127.0.0.1"
+  kick-message: "<red>Try to join the server later</red>"
+  version-name: "MAINTENANCE MODE ENABLED!!"
+  descriptions:
+    - "      <gold>🔥<bold> </bold><#ff3056><bold>BOMJ<#DDDDDD>PVP</bold> <gold>🔥 <bold> </bold><dark_gray>« <gradient:#8e47ff:#47d4ff>Ивенты Прокачка ЛакиБлоки</gradient> <dark_gray>»{NL}  <#ff4747><bold>BOXPVP БЫЛ ВАЙП!</u>        <#D56CFC>☄ <#ff52ee>BoxPVP сервер <#D56CFC>☄"
+  favicons:
+    - "troll.png"
+  information:
+    - "Contact support: https://elytrium.net/discord"
+  #-1 = disabled
+  override-online: -1
+  #-1 = disabled
+  override-max-online: -1
+  #Separate MOTDs/favicons/information for different protocol versions
+  #See https://wiki.vg/Protocol_version_numbers
+  versions:
+    #{} = disabled
+    descriptions:
+      757-759:
+        - "      <gold>🔥<bold> </bold><#ff3056><bold>BOMJ<#DDDDDD>PVP</bold> <gold>🔥 <bold> </bold><dark_gray>« <gradient:#8e47ff:#47d4ff>Ивенты Прокачка ЛакиБлоки</gradient> <dark_gray>»{NL}  <#ff4747><bold>BOXPVP БЫЛ ВАЙП!</u>        <#D56CFC>☄ <#ff52ee>BoxPVP сервер <#D56CFC>☄"
+    #{} = disabled
+    favicons:
+      758-758:
+        - "troll.png"
+    #{} = disabled
+    information:
+      756-759:
+        - "Server is"
+        - "under"
+        - "maintenance"
+  domains:
+    example.com:25565:
+      description:
+        - "Description for example.com"
+      favicon:
+        - "troll.png"
+      information:
+        - "Information for example.com"
+  command:
+    usage: "{PRFX} Usage: <gold>/maintenance <off|on|toggle></gold>"
+shutdown-scheduler:
+  #Server will stop accepting new connections
+  shutdown-scheduler-enabled: false
+  #Server will shut down after everyone has left the server
+  shutdown-on-zero-players: false
+  whitelist:
+    - "127.0.0.1"
