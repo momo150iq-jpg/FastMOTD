@@ -23,24 +23,26 @@ import com.velocitypowered.api.proxy.server.ServerPing;
 import com.velocitypowered.api.util.Favicon;
 import com.velocitypowered.proxy.protocol.ProtocolUtils;
 import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufUtil;
 import io.netty.buffer.Unpooled;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.UUID;
-import net.elytrium.fastmotd.utils.ByteBufCopyThreadLocal;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.ComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 
 public class MOTDBytesHolder {
 
-  private final ByteBuf byteBuf;
+  // Template is only written by replaceOnline() (updater thread). Pings read the immutable published copy
+  // and get their own buffer, so no shared refcount or shared protocol digits between connections.
+  private final byte[] template;
+  private volatile byte[] packet;
   private final ComponentSerializer<Component, Component, String> inputSerializer;
   private final int maxOnlineDigit;
   private final int onlineDigit;
   private final int protocolDigit;
-  private ByteBufCopyThreadLocal localByteBuf;
-  private ServerPing compatPingInfo;
+  private volatile ServerPing compatPingInfo;
 
   public MOTDBytesHolder(ComponentSerializer<Component, Component, String> inputSerializer, String descriptionJson,
                          Component description, String name, String favicon, List<String> information) {
@@ -101,23 +103,22 @@ public class MOTDBytesHolder {
     this.onlineDigit = Bytes.indexOf(bytes, "       1".getBytes(StandardCharsets.UTF_8)) + 1 + varIntLength;
     this.protocolDigit = Bytes.indexOf(bytes, "protocol\":        1}".getBytes(StandardCharsets.UTF_8)) + 19 + varIntLength;
 
-    this.byteBuf = Unpooled.directBuffer(length + lengthOfLength);
-    ProtocolUtils.writeVarInt(this.byteBuf, length);
-    this.byteBuf.writeByte(0);
-    ProtocolUtils.writeVarInt(this.byteBuf, bytes.length);
-    this.byteBuf.writeBytes(bytes);
+    ByteBuf byteBuf = Unpooled.buffer(length + lengthOfLength);
+    ProtocolUtils.writeVarInt(byteBuf, length);
+    byteBuf.writeByte(0);
+    ProtocolUtils.writeVarInt(byteBuf, bytes.length);
+    byteBuf.writeBytes(bytes);
+    this.template = ByteBufUtil.getBytes(byteBuf);
+    byteBuf.release();
 
-    this.localByteBuf = new ByteBufCopyThreadLocal(this.byteBuf);
+    this.packet = this.template.clone();
     this.compatPingInfo = compatServerPingBuilder.build();
   }
 
-  public void replaceOnline(int max, int online) {
+  public synchronized void replaceOnline(int max, int online) {
     this.localReplaceOnline(this.maxOnlineDigit, max);
     this.localReplaceOnline(this.onlineDigit, online);
-
-    ByteBufCopyThreadLocal previousLocalBuffer = this.localByteBuf;
-    this.localByteBuf = new ByteBufCopyThreadLocal(this.byteBuf);
-    previousLocalBuffer.release();
+    this.packet = this.template.clone();
 
     this.compatPingInfo = this.compatPingInfo.asBuilder()
         .maximumPlayers(max)
@@ -126,14 +127,14 @@ public class MOTDBytesHolder {
   }
 
   private void localReplaceOnline(int digit, int to) {
-    this.byteBuf.setByte(digit + 0, to >= 10000000 ? (to / 10000000 % 10) + '0' : ' ');
-    this.byteBuf.setByte(digit + 1, to >= 1000000 ? (to / 1000000 % 10) + '0' : ' ');
-    this.byteBuf.setByte(digit + 2, to >= 100000 ? (to / 100000 % 10) + '0' : ' ');
-    this.byteBuf.setByte(digit + 3, to >= 10000 ? (to / 10000 % 10) + '0' : ' ');
-    this.byteBuf.setByte(digit + 4, to >= 1000 ? (to / 1000 % 10) + '0' : ' ');
-    this.byteBuf.setByte(digit + 5, to >= 100 ? (to / 100 % 10) + '0' : ' ');
-    this.byteBuf.setByte(digit + 6, to >= 10 ? (to / 10 % 10) + '0' : ' ');
-    this.byteBuf.setByte(digit + 7, (to % 10) + '0');
+    this.template[digit + 0] = (byte) (to >= 10000000 ? (to / 10000000 % 10) + '0' : ' ');
+    this.template[digit + 1] = (byte) (to >= 1000000 ? (to / 1000000 % 10) + '0' : ' ');
+    this.template[digit + 2] = (byte) (to >= 100000 ? (to / 100000 % 10) + '0' : ' ');
+    this.template[digit + 3] = (byte) (to >= 10000 ? (to / 10000 % 10) + '0' : ' ');
+    this.template[digit + 4] = (byte) (to >= 1000 ? (to / 1000 % 10) + '0' : ' ');
+    this.template[digit + 5] = (byte) (to >= 100 ? (to / 100 % 10) + '0' : ' ');
+    this.template[digit + 6] = (byte) (to >= 10 ? (to / 10 % 10) + '0' : ' ');
+    this.template[digit + 7] = (byte) ((to % 10) + '0');
   }
 
   public ServerPing getCompatPingInfo(ProtocolVersion version, boolean replaceProtocol) {
@@ -147,14 +148,14 @@ public class MOTDBytesHolder {
   }
 
   public ByteBuf getByteBuf(ProtocolVersion version, boolean replaceProtocol) {
-    ByteBuf buf = this.localByteBuf.get();
+    ByteBuf buf = Unpooled.wrappedBuffer(this.packet.clone());
 
     if (replaceProtocol) {
       int protocol = version.getProtocol();
       this.replaceStrInt(buf, this.protocolDigit, this.protocolDigit - 9, protocol);
     }
 
-    return buf.retain();
+    return buf;
   }
 
   private void replaceStrInt(ByteBuf buf, int startIndex, int endIndex, int toSet) {
@@ -173,10 +174,6 @@ public class MOTDBytesHolder {
   }
 
   public void dispose() {
-    if (this.byteBuf.refCnt() != 0) {
-      this.byteBuf.release();
-    }
-
-    this.localByteBuf.release();
+    // Nothing to release: every ping gets its own heap buffer.
   }
 }
