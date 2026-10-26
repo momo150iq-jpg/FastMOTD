@@ -82,21 +82,39 @@ main:
       center: true
       descriptions:
         - "<sprite:block/tnt_side> <#D8D8D8>☠</#D8D8D8> <shadow:#3b0a6b:1><bold><gradient:#ff2d75:#ffb03a>BOMJ</gradient><#FFFFFF>PVP</#FFFFFF></bold></shadow> <#D8D8D8>☠</#D8D8D8> <sprite:block/tnt_side>  <shadow:#4A0A00:1><bold><gradient:#FF4A3D:#FF8A3D>ВАЙП! 26.10</gradient></bold></shadow>{NL}<shadow:#2A1A10:1><bold><#FFF3D6>ВСЁ С НУЛЯ</#FFF3D6></bold></shadow> <#AAAAAA>· заходи первым</#AAAAAA>"
-      favicons: []
+      favicons:
+        - "aura/aura-purple.png"
+        - "aura/aura-cyan.png"
+        - "aura/aura-gold.png"
+        - "aura/aura-toxic.png"
+        - "aura/aura-red.png"
+        - "aura/aura-pink.png"
       information: []
     wipe_smooth:
       protocols: "769-772"
       center: true
       descriptions:
         - "<#FF6A3D>⚡</#FF6A3D> <#D8D8D8>☠</#D8D8D8> <shadow:#3b0a6b:1><bold><gradient:#ff2d75:#ffb03a>BOMJ</gradient><#FFFFFF>PVP</#FFFFFF></bold></shadow> <#D8D8D8>☠</#D8D8D8> <#FF6A3D>⚡</#FF6A3D>  <shadow:#4A0A00:1><bold><gradient:#FF4A3D:#FF8A3D>ВАЙП! 26.10</gradient></bold></shadow>{NL}<shadow:#2A1A10:1><bold><#FFF3D6>ВСЁ С НУЛЯ</#FFF3D6></bold></shadow> <#AAAAAA>· заходи первым</#AAAAAA>"
-      favicons: []
+      favicons:
+        - "aura/aura-purple.png"
+        - "aura/aura-cyan.png"
+        - "aura/aura-gold.png"
+        - "aura/aura-toxic.png"
+        - "aura/aura-red.png"
+        - "aura/aura-pink.png"
       information: []
     wipe_legacy:
       protocols: "-768"
       center: true
       descriptions:
         - "<red>⚡</red> <gray>☠</gray> <bold><#ff2d75>BOMJ</#ff2d75><white>PVP</white></bold> <gray>☠</gray> <red>⚡</red>  <red><bold>ВАЙП! 26.10</bold></red>{NL}<white><bold>ВСЁ С НУЛЯ</bold></white> <gray>· заходи первым</gray>"
-      favicons: []
+      favicons:
+        - "aura/aura-purple.png"
+        - "aura/aura-cyan.png"
+        - "aura/aura-gold.png"
+        - "aura/aura-toxic.png"
+        - "aura/aura-red.png"
+        - "aura/aura-pink.png"
       information: []
     wipe_rw:
       protocols: "off"
