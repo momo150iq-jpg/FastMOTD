@@ -77,19 +77,19 @@ main:
     wipe:
       protocols: "773+"
       descriptions:
-        - "   <sprite:block/tnt_side> <#E8E8E8>☠</#E8E8E8> <shadow:#4a0000:1><bold><gradient:#ff1a1a:#ffd000:#ff1a1a>ВАЙП! 26.10</gradient></bold></shadow> <#E8E8E8>☠</#E8E8E8> <sprite:block/tnt_side>  <shadow:#3b0a6b:1><bold><gradient:#ff2d75:#ffb03a>BOMJ</gradient><gradient:#7ffcff:#ffffff>PVP</gradient></bold></shadow>{NL}  <sprite:block/fire_0> <shadow:#3d2a00:1><bold><#FFE259>ВСЁ С НУЛЯ</#FFE259></bold></shadow> <dark_gray>·</dark_gray> <gradient:#47FF79:#47d4ff>заходи первым</gradient> <sprite:items:item/nether_star><sprite:items:item/totem_of_undying>"
+        - "   <sprite:block/tnt_side> <#E8E8E8>☠</#E8E8E8> <shadow:#3b0a6b:1><bold><gradient:#ff2d75:#ffb03a>BOMJ</gradient><gradient:#7ffcff:#ffffff>PVP</gradient></bold></shadow> <#E8E8E8>☠</#E8E8E8> <sprite:block/tnt_side>  <shadow:#4a0000:1><bold><gradient:#ff1a1a:#ffd000:#ff1a1a>ВАЙП! 26.10</gradient></bold></shadow>{NL}  <sprite:block/fire_0> <shadow:#FFFFFF:1><bold><#FF7A00>ВСЁ С НУЛЯ</#FF7A00></bold></shadow> <dark_gray>·</dark_gray> <gradient:#47FF79:#47d4ff>заходи первым</gradient> <sprite:items:item/nether_star><sprite:items:item/totem_of_undying>"
       favicons: []
       information: []
     wipe_smooth:
       protocols: "769-772"
       descriptions:
-        - "   <#ff3b3b>⚡</#ff3b3b> <#E8E8E8>☠</#E8E8E8> <shadow:#4a0000:1><bold><gradient:#ff1a1a:#ffd000:#ff1a1a>ВАЙП! 26.10</gradient></bold></shadow> <#E8E8E8>☠</#E8E8E8> <#ff3b3b>⚡</#ff3b3b>  <shadow:#3b0a6b:1><bold><gradient:#ff2d75:#ffb03a>BOMJ</gradient><gradient:#7ffcff:#ffffff>PVP</gradient></bold></shadow>{NL}  <gold>☄</gold> <shadow:#3d2a00:1><bold><#FFE259>ВСЁ С НУЛЯ</#FFE259></bold></shadow> <dark_gray>·</dark_gray> <gradient:#47FF79:#47d4ff>заходи первым</gradient> <gold>☠</gold>"
+        - "   <#ff3b3b>⚡</#ff3b3b> <#E8E8E8>☠</#E8E8E8> <shadow:#3b0a6b:1><bold><gradient:#ff2d75:#ffb03a>BOMJ</gradient><gradient:#7ffcff:#ffffff>PVP</gradient></bold></shadow> <#E8E8E8>☠</#E8E8E8> <#ff3b3b>⚡</#ff3b3b>  <shadow:#4a0000:1><bold><gradient:#ff1a1a:#ffd000:#ff1a1a>ВАЙП! 26.10</gradient></bold></shadow>{NL}  <gold>☄</gold> <shadow:#FFFFFF:1><bold><#FF7A00>ВСЁ С НУЛЯ</#FF7A00></bold></shadow> <dark_gray>·</dark_gray> <gradient:#47FF79:#47d4ff>заходи первым</gradient> <gold>☠</gold>"
       favicons: []
       information: []
     wipe_legacy:
       protocols: "-768"
       descriptions:
-        - "      <red>⚡</red> <white>☠</white> <red><bold>ВАЙП! 26.10</bold></red> <white>☠</white> <red>⚡</red>  <bold><#ff2d75>BOMJ</#ff2d75><aqua>PVP</aqua></bold>{NL}  <yellow><bold>ВСЁ С НУЛЯ</bold></yellow> <dark_gray>·</dark_gray> <green>заходи первым!</green>"
+        - "      <red>⚡</red> <white>☠</white> <bold><#ff2d75>BOMJ</#ff2d75><aqua>PVP</aqua></bold> <white>☠</white> <red>⚡</red>  <red><bold>ВАЙП! 26.10</bold></red>{NL}  <yellow><bold>ВСЁ С НУЛЯ</bold></yellow> <dark_gray>·</dark_gray> <green>заходи первым!</green>"
       favicons: []
       information: []
     pretty:
