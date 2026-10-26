@@ -227,6 +227,7 @@ public class FastMOTD {
             Settings.IMP.MAINTENANCE.VERSIONS.FAVICONS, Settings.IMP.MAINTENANCE.VERSIONS.INFORMATION,
             null, Settings.IMP.MAINTENANCE.DOMAINS, this.domainMaintenanceMOTD);
 
+    this.updateMOTD();
     this.updater = this.server.getScheduler()
         .buildTask(this, this::updateMOTD)
         .repeat(Settings.IMP.MAIN.UPDATE_RATE, TimeUnit.MILLISECONDS)
@@ -295,8 +296,16 @@ public class FastMOTD {
           return;
         }
 
+        IntStream range;
+        try {
+          range = this.parseProtocols(tier.PROTOCOLS);
+        } catch (NumberFormatException e) {
+          this.logger.warn("MOTD tier {}: bad protocols '{}', tier skipped", tierName, tier.PROTOCOLS);
+          return;
+        }
+
         IntSet protocols = new IntOpenHashSet();
-        this.parseProtocols(tier.PROTOCOLS).forEach(protocol -> {
+        range.forEach(protocol -> {
           if (claimed.add(protocol)) {
             protocols.add(protocol);
           }
