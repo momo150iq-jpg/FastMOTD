@@ -21,11 +21,14 @@ import com.velocitypowered.api.network.ProtocolVersion;
 import com.velocitypowered.api.proxy.server.ServerPing;
 import com.velocitypowered.proxy.protocol.ProtocolUtils;
 import io.netty.buffer.ByteBuf;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import net.elytrium.fastmotd.utils.ObjectComponents;
+import net.elytrium.fastmotd.utils.TextWidth;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.serializer.ComponentSerializer;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 
@@ -46,20 +49,40 @@ public class MOTDHolder {
   private final List<MOTDBytesHolder> distinctHolders;
 
   public MOTDHolder(ComponentSerializer<Component, Component, String> serializer, String versionName,
-                    String descriptionSerialized, String favicon, List<String> information) {
+                    String descriptionSerialized, String favicon, List<String> information, boolean center) {
     String name = versionName.replace("\"", "\\\"");
-    Component description = serializer.deserialize(descriptionSerialized.replace("{NL}", "\n"));
+    Component description = center ? null : serializer.deserialize(descriptionSerialized.replace("{NL}", "\n"));
+    List<Component> lines = center ? Arrays.stream(descriptionSerialized.split("\\{NL}", -1))
+        .map(line -> serializer.deserialize(line.strip()))
+        .toList() : null;
 
     Map<String, MOTDBytesHolder> unique = new HashMap<>();
     for (int i = 0; i < PROFILES.length; i++) {
       ProtocolVersion profile = PROFILES[i];
-      Component transformed = ObjectComponents.transform(description, objectMode(profile));
+      Component transformed = center
+          ? centered(lines, objectMode(profile))
+          : ObjectComponents.transform(description, objectMode(profile));
       GsonComponentSerializer outputSerializer = ProtocolUtils.getJsonChatSerializer(profile);
       String json = outputSerializer.serialize(transformed);
       this.holders[i] = unique.computeIfAbsent(json, j -> new MOTDBytesHolder(serializer, j, transformed, name, favicon, information));
     }
 
     this.distinctHolders = List.copyOf(unique.values());
+  }
+
+  // Width depends on the profile (objects are dropped below 1.21.9), so every profile is padded on its own.
+  private static Component centered(List<Component> lines, ObjectComponents.Mode mode) {
+    TextComponent.Builder builder = Component.text();
+    for (int i = 0; i < lines.size(); i++) {
+      if (i != 0) {
+        builder.append(Component.newline());
+      }
+
+      Component line = ObjectComponents.transform(lines.get(i), mode);
+      builder.append(TextWidth.centerPadding(TextWidth.width(line))).append(line);
+    }
+
+    return builder.build();
   }
 
   private static ObjectComponents.Mode objectMode(ProtocolVersion version) {

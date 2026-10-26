@@ -76,6 +76,11 @@ public class Settings extends YamlSerializable {
         @CommentValue("but will open your server to nullping attacks")
     })
     public boolean ALLOW_IMPROPER_PINGS = false;
+    @Comment({
+        @CommentValue("Center every MOTD line (descriptions, versions, domains) by vanilla glyph widths."),
+        @CommentValue("Leading spaces of each line are dropped, padding is computed per client version."),
+    })
+    public boolean CENTER = false;
 
     public VERSIONS VERSIONS = new VERSIONS();
 
@@ -109,6 +114,7 @@ public class Settings extends YamlSerializable {
   public static class TIER_NODE {
 
     public String PROTOCOLS = "773+";
+    public boolean CENTER = false;
     public List<String> DESCRIPTIONS = List.of("<sprite:items:item/diamond_sword> <bold><red>FastMOTD</red></bold> <head:Notch>{NL} -> 1.21.9+");
     public List<String> FAVICONS = List.of();
     public List<String> INFORMATION = List.of();

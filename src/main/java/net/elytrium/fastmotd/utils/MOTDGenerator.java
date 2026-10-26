@@ -51,10 +51,18 @@ public class MOTDGenerator {
   private final List<String> information;
   private final int holdersAmount;
   private final MOTDHolder[] holders;
+  private final boolean center;
 
   public MOTDGenerator(FastMOTD plugin, ComponentSerializer<Component, Component, String> serializer,
                        String versionName, List<String> descriptions, List<String> favicons, List<String> information) {
+    this(plugin, serializer, versionName, descriptions, favicons, information, false);
+  }
+
+  public MOTDGenerator(FastMOTD plugin, ComponentSerializer<Component, Component, String> serializer,
+                       String versionName, List<String> descriptions, List<String> favicons, List<String> information,
+                       boolean center) {
     this.plugin = plugin;
+    this.center = center;
     this.serializer = serializer;
     this.versionName = versionName;
     this.descriptions = descriptions;
@@ -86,7 +94,7 @@ public class MOTDGenerator {
   private void generate(int i, String favicon) {
     for (int j = 0, descriptionsSize = this.descriptions.size(); j < descriptionsSize; j++) {
       String description = this.descriptions.get(j);
-      this.holders[i * descriptionsSize + j] = new MOTDHolder(this.serializer, this.versionName, description, favicon, this.information);
+      this.holders[i * descriptionsSize + j] = new MOTDHolder(this.serializer, this.versionName, description, favicon, this.information, this.center);
     }
   }
 

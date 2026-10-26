@@ -24,6 +24,8 @@ import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.ObjectComponent;
 import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.ShadowColor;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.Tag;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
@@ -44,7 +46,7 @@ public final class ObjectComponents {
   }
 
   public enum Mode {
-    /** Client renders object components and the items atlas. */
+    /** Client renders object components and the items atlas (objects only get default color/shadow). */
     KEEP,
     /** 1.21.9 - 1.21.10: no items atlas, item/ sprites still live in the blocks atlas. */
     ITEMS_TO_BLOCKS,
@@ -53,10 +55,6 @@ public final class ObjectComponents {
   }
 
   public static Component transform(Component component, Mode mode) {
-    if (mode == Mode.KEEP) {
-      return component;
-    }
-
     List<Component> children = new ArrayList<>(component.children().size());
     for (Component child : component.children()) {
       children.add(transform(child, mode));
@@ -73,9 +71,22 @@ public final class ObjectComponents {
         return builder.append(children).build();
       }
 
-      if (object.contents() instanceof SpriteObjectContents sprite && ITEMS_ATLAS.equals(sprite.atlas())) {
-        return object.contents(ObjectContents.sprite(sprite.sprite())).children(children);
+      if (mode == Mode.ITEMS_TO_BLOCKS && object.contents() instanceof SpriteObjectContents sprite && ITEMS_ATLAS.equals(sprite.atlas())) {
+        object = object.contents(ObjectContents.sprite(sprite.sprite()));
       }
+
+      // Objects are drawn like glyphs: tinted by the text color and with a drop shadow. The server list draws
+      // the MOTD in gray (0x808080) with shadow, so an object without its own color comes out half as bright
+      // with a dark outline. Default them to untinted and shadowless.
+      if (object.color() == null) {
+        object = object.color(NamedTextColor.WHITE);
+      }
+
+      if (object.shadowColor() == null) {
+        object = object.shadowColor(ShadowColor.shadowColor(0));
+      }
+
+      return object.children(children);
     }
 
     return component.children(children);

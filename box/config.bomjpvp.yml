@@ -1,4 +1,4 @@
-version: "1.0.10-box.3"
+version: "1.0.10-box.4"
 #Available serializers:
 #LEGACY_AMPERSAND - "&c&lExample &c&9Text".
 #LEGACY_SECTION - "§c§lExample §c§9Text".
@@ -48,6 +48,9 @@ main:
   #Enabling this will allow non-vanilla ping packets sequence,
   #but will open your server to nullping attacks
   allow-improper-pings: false
+  #Center every MOTD line (descriptions, versions, domains) by vanilla glyph widths.
+  #Leading spaces of each line are dropped, padding is computed per client version.
+  center: true
   #Separate MOTDs/favicons/information for different protocol versions
   #See https://wiki.vg/Protocol_version_numbers
   versions:
@@ -76,42 +79,70 @@ main:
   tiers:
     wipe:
       protocols: "773+"
+      center: true
       descriptions:
-        - "   <sprite:block/tnt_side> <#E8E8E8>☠</#E8E8E8> <shadow:#3b0a6b:1><bold><gradient:#ff2d75:#ffb03a>BOMJ</gradient><gradient:#7ffcff:#ffffff>PVP</gradient></bold></shadow> <#E8E8E8>☠</#E8E8E8> <sprite:block/tnt_side>  <shadow:#4a0000:1><bold><gradient:#ff1a1a:#ffd000:#ff1a1a>ВАЙП! 26.10</gradient></bold></shadow>{NL}  <sprite:block/fire_0> <shadow:#1a46d0:1><bold><#FFE259>ВСЁ С НУЛЯ</#FFE259></bold></shadow> <dark_gray>·</dark_gray> <gradient:#47FF79:#47d4ff>заходи первым</gradient> <sprite:items:item/nether_star><sprite:items:item/totem_of_undying>"
+        - "<sprite:block/tnt_side> <#D8D8D8>☠</#D8D8D8> <shadow:#3b0a6b:1><bold><gradient:#ff2d75:#ffb03a>BOMJ</gradient><#FFFFFF>PVP</#FFFFFF></bold></shadow> <#D8D8D8>☠</#D8D8D8> <sprite:block/tnt_side>  <shadow:#4A0A00:1><bold><gradient:#FF4A3D:#FF8A3D>ВАЙП! 26.10</gradient></bold></shadow>{NL}<shadow:#2A1A10:1><bold><#FFF3D6>ВСЁ С НУЛЯ</#FFF3D6></bold></shadow> <#AAAAAA>· заходи первым</#AAAAAA>"
       favicons: []
       information: []
     wipe_smooth:
       protocols: "769-772"
+      center: true
       descriptions:
-        - "   <#ff3b3b>⚡</#ff3b3b> <#E8E8E8>☠</#E8E8E8> <shadow:#3b0a6b:1><bold><gradient:#ff2d75:#ffb03a>BOMJ</gradient><gradient:#7ffcff:#ffffff>PVP</gradient></bold></shadow> <#E8E8E8>☠</#E8E8E8> <#ff3b3b>⚡</#ff3b3b>  <shadow:#4a0000:1><bold><gradient:#ff1a1a:#ffd000:#ff1a1a>ВАЙП! 26.10</gradient></bold></shadow>{NL}  <gold>☄</gold> <shadow:#1a46d0:1><bold><#FFE259>ВСЁ С НУЛЯ</#FFE259></bold></shadow> <dark_gray>·</dark_gray> <gradient:#47FF79:#47d4ff>заходи первым</gradient> <gold>☠</gold>"
+        - "<#FF6A3D>⚡</#FF6A3D> <#D8D8D8>☠</#D8D8D8> <shadow:#3b0a6b:1><bold><gradient:#ff2d75:#ffb03a>BOMJ</gradient><#FFFFFF>PVP</#FFFFFF></bold></shadow> <#D8D8D8>☠</#D8D8D8> <#FF6A3D>⚡</#FF6A3D>  <shadow:#4A0A00:1><bold><gradient:#FF4A3D:#FF8A3D>ВАЙП! 26.10</gradient></bold></shadow>{NL}<shadow:#2A1A10:1><bold><#FFF3D6>ВСЁ С НУЛЯ</#FFF3D6></bold></shadow> <#AAAAAA>· заходи первым</#AAAAAA>"
       favicons: []
       information: []
     wipe_legacy:
       protocols: "-768"
+      center: true
       descriptions:
-        - "      <red>⚡</red> <white>☠</white> <bold><#ff2d75>BOMJ</#ff2d75><aqua>PVP</aqua></bold> <white>☠</white> <red>⚡</red>  <red><bold>ВАЙП! 26.10</bold></red>{NL}  <yellow><bold>ВСЁ С НУЛЯ</bold></yellow> <dark_gray>·</dark_gray> <green>заходи первым!</green>"
+        - "<red>⚡</red> <gray>☠</gray> <bold><#ff2d75>BOMJ</#ff2d75><white>PVP</white></bold> <gray>☠</gray> <red>⚡</red>  <red><bold>ВАЙП! 26.10</bold></red>{NL}<white><bold>ВСЁ С НУЛЯ</bold></white> <gray>· заходи первым</gray>"
+      favicons: []
+      information: []
+    wipe_rw:
+      protocols: "off"
+      center: true
+      descriptions:
+        - "<sprite:block/tnt_side> <#D8D8D8>☠</#D8D8D8> <shadow:#2A2A2A:1><bold><gradient:#FFFFFF:#D6D6D6>BOMJPVP</gradient></bold></shadow> <#D8D8D8>☠</#D8D8D8> <sprite:block/tnt_side>  <shadow:#4A0000:1><bold><gradient:#FF3B30:#FF6A55>ВАЙП! 26.10</gradient></bold></shadow>{NL}<shadow:#4A0000:1><bold><#FFFFFF>ВСЁ С НУЛЯ</#FFFFFF></bold></shadow> <#AAAAAA>· заходи первым</#AAAAAA>"
+      favicons: []
+      information: []
+    wipe_rw_smooth:
+      protocols: "off"
+      center: true
+      descriptions:
+        - "<#FF3B30>⚡</#FF3B30> <#D8D8D8>☠</#D8D8D8> <shadow:#2A2A2A:1><bold><gradient:#FFFFFF:#D6D6D6>BOMJPVP</gradient></bold></shadow> <#D8D8D8>☠</#D8D8D8> <#FF3B30>⚡</#FF3B30>  <shadow:#4A0000:1><bold><gradient:#FF3B30:#FF6A55>ВАЙП! 26.10</gradient></bold></shadow>{NL}<shadow:#4A0000:1><bold><#FFFFFF>ВСЁ С НУЛЯ</#FFFFFF></bold></shadow> <#AAAAAA>· заходи первым</#AAAAAA>"
+      favicons: []
+      information: []
+    wipe_rw_legacy:
+      protocols: "off"
+      center: true
+      descriptions:
+        - "<red>⚡</red> <gray>☠</gray> <white><bold>BOMJPVP</bold></white> <gray>☠</gray> <red>⚡</red>  <red><bold>ВАЙП! 26.10</bold></red>{NL}<white><bold>ВСЁ С НУЛЯ</bold></white> <gray>· заходи первым</gray>"
       favicons: []
       information: []
     pretty:
       protocols: "off"
+      center: false
       descriptions:
         - "      <sprite:items:item/diamond_sword> <bold><gradient:#ff3056:#ff9a3d>BOMJ</gradient><gradient:#ffffff:#9aa0a6>PVP</gradient></bold> <sprite:items:item/diamond_sword> <dark_gray>«</dark_gray> <shadow:#1d4d00:1><gradient:#8CF65F:#47FF79>БОМЖ-ГОРОД</gradient></shadow> <dark_gray>»</dark_gray>{NL}  <sprite:gui:hud/heart/hardcore_full> <#ff4747><bold>BOXPVP</bold> <sprite:block/tnt_side> <gradient:#B8FA36:#47d4ff>кланы · ивенты · лаки-блоки</gradient> <sprite:items:item/totem_of_undying>"
       favicons: []
       information: []
     pretty_bomj:
       protocols: "off"
+      center: false
       descriptions:
         - "      <sprite:items:item/glass_bottle> <bold><gradient:#ff3056:#ff9a3d>BOMJ</gradient><gradient:#ffffff:#9aa0a6>PVP</gradient></bold> <sprite:items:item/rotten_flesh> <dark_gray>«</dark_gray> <font:uniform><#FFCA9F>город бомжей</font> <dark_gray>»</dark_gray>{NL}  <sprite:items:item/bread> <#ffaa2b><bold>BOXPVP</bold> <#FF763F>КАЧАUСЯ · МАЧИ ЛОХОВ · ДЕРЖИ РАЙОН <sprite:items:item/stick>"
       favicons: []
       information: []
     pretty_lucky:
       protocols: "off"
+      center: false
       descriptions:
         - "      <sprite:block/gold_block> <bold><gradient:#ff3056:#ff9a3d>BOMJ</gradient><gradient:#ffffff:#9aa0a6>PVP</gradient></bold> <sprite:block/gold_block> <dark_gray>«</dark_gray> <shadow:#5a3c00:1><gradient:#FFE259:#FFA751>ЛАКИ-БЛОКИ</gradient></shadow> <dark_gray>»</dark_gray>{NL}  <sprite:items:item/golden_apple> <#ffd84d>Ивент идёт!</#ffd84d> <gray>Ломай блоки — лови</gray> <sprite:items:item/emerald> <sprite:items:item/diamond> <sprite:items:item/nether_star>"
       favicons: []
       information: []
     smooth:
       protocols: "off"
+      center: false
       descriptions:
         - "      <gold>☠</gold> <bold><gradient:#ff3056:#ff9a3d>BOMJ</gradient><gradient:#ffffff:#9aa0a6>PVP</gradient></bold> <gold>☠</gold> <dark_gray>«</dark_gray> <shadow:#1d4d00:1><gradient:#8CF65F:#47FF79>БОМЖ-ГОРОД</gradient></shadow> <dark_gray>»</dark_gray>{NL}  <shadow:#4d0000:1><#ff4747><bold>BOXPVP</bold></shadow> <#ff4747>☄</#ff4747> <font:uniform><gradient:#B8FA36:#47d4ff>кланы · ивенты · лаки-блоки</gradient></font> <#ff4747>☄"
       favicons: []

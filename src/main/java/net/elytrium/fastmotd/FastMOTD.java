@@ -219,13 +219,13 @@ public class FastMOTD {
     this.generateMOTDGenerators(serializer, Settings.IMP.MAIN.VERSION_NAME, Settings.IMP.MAIN.DESCRIPTIONS,
             Settings.IMP.MAIN.FAVICONS, Settings.IMP.MAIN.INFORMATION, this.motdGenerators, this.protocolPointers,
             Settings.IMP.MAIN.VERSIONS.DESCRIPTIONS, Settings.IMP.MAIN.VERSIONS.FAVICONS, Settings.IMP.MAIN.VERSIONS.INFORMATION,
-            Settings.IMP.MAIN.TIERS, Settings.IMP.MAIN.DOMAINS, this.domainMOTD);
+            Settings.IMP.MAIN.TIERS, Settings.IMP.MAIN.DOMAINS, this.domainMOTD, Settings.IMP.MAIN.CENTER);
 
     this.generateMOTDGenerators(serializer, Settings.IMP.MAINTENANCE.VERSION_NAME, Settings.IMP.MAINTENANCE.DESCRIPTIONS,
             Settings.IMP.MAINTENANCE.FAVICONS, Settings.IMP.MAINTENANCE.INFORMATION, this.maintenanceMOTDGenerators,
             this.maintenanceProtocolPointers, Settings.IMP.MAINTENANCE.VERSIONS.DESCRIPTIONS,
             Settings.IMP.MAINTENANCE.VERSIONS.FAVICONS, Settings.IMP.MAINTENANCE.VERSIONS.INFORMATION,
-            null, Settings.IMP.MAINTENANCE.DOMAINS, this.domainMaintenanceMOTD);
+            null, Settings.IMP.MAINTENANCE.DOMAINS, this.domainMaintenanceMOTD, false);
 
     this.updateMOTD();
     this.updater = this.server.getScheduler()
@@ -241,7 +241,7 @@ public class FastMOTD {
           Map<String, List<String>> descriptionVersions, Map<String, List<String>> faviconVersions,
           Map<String, List<String>> informationVersions, Map<String, Settings.TIER_NODE> tiers,
           Map<String, Settings.DOMAIN_MOTD_NODE> domainMotd,
-          Map<String, MOTDGenerator> domainDest) {
+          Map<String, MOTDGenerator> domainDest, boolean center) {
     descriptionVersions = Objects.requireNonNullElseGet(descriptionVersions, HashMap::new);
     faviconVersions = Objects.requireNonNullElseGet(faviconVersions, HashMap::new);
     informationVersions = Objects.requireNonNullElseGet(informationVersions, HashMap::new);
@@ -250,7 +250,7 @@ public class FastMOTD {
     List<String> nonNullDefaultInformation = Objects.requireNonNullElseGet(defaultInformation, Collections::emptyList);
 
     MOTDGenerator defaultMotdGenerator =
-        new MOTDGenerator(this, serializer, versionName, nonNullDefaultDescriptions, nonNullDefaultFavicons, nonNullDefaultInformation);
+        new MOTDGenerator(this, serializer, versionName, nonNullDefaultDescriptions, nonNullDefaultFavicons, nonNullDefaultInformation, center);
     defaultMotdGenerator.generate();
     dest.add(defaultMotdGenerator);
 
@@ -283,7 +283,7 @@ public class FastMOTD {
       MOTDGenerator motdGenerator = new MOTDGenerator(this, serializer, versionName,
               protocolDescriptions.getOrDefault(key, nonNullDefaultDescriptions),
               protocolIcons.getOrDefault(key, nonNullDefaultFavicons),
-              protocolInformation.getOrDefault(key, nonNullDefaultInformation));
+              protocolInformation.getOrDefault(key, nonNullDefaultInformation), center);
       motdGenerator.generate();
       dest.add(motdGenerator);
       identical.forEach(p -> destPointers.put(p, idx));
@@ -320,7 +320,7 @@ public class FastMOTD {
         MOTDGenerator motdGenerator = new MOTDGenerator(this, serializer, versionName,
                 orDefault(tier.DESCRIPTIONS, nonNullDefaultDescriptions),
                 orDefault(tier.FAVICONS, nonNullDefaultFavicons),
-                orDefault(tier.INFORMATION, nonNullDefaultInformation));
+                orDefault(tier.INFORMATION, nonNullDefaultInformation), tier.CENTER);
         motdGenerator.generate();
         dest.add(motdGenerator);
         protocols.forEach(p -> destPointers.put(p, idx));
@@ -330,7 +330,7 @@ public class FastMOTD {
 
     domainMotd.forEach((domain, motdNode) -> {
       MOTDGenerator motdGenerator = new MOTDGenerator(this, serializer, versionName,
-              motdNode.DESCRIPTION, motdNode.FAVICON, motdNode.INFORMATION);
+              motdNode.DESCRIPTION, motdNode.FAVICON, motdNode.INFORMATION, center);
       motdGenerator.generate();
       domainDest.put(domain, motdGenerator);
     });
