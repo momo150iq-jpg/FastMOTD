@@ -36,16 +36,27 @@ V = [
 favs = re.search(r"    wipe:\n(?:      .*\n|        - .*\n)*?      favicons:\n((?:        - .*\n)+)", s)
 favicons = favs.group(1) if favs else ""
 
+# visible colored shadows: a deeper, saturated tone of each element (logo, title, slogan, tail, skull/bolt)
+SH = {
+    "neon": ("#7A1FD1", "#1F4FD1", "#6A2AC0", "#3E4A66", "#5A3A90"),
+    "gold": ("#B4500A", "#8A0F2A", "#9A5A10", "#3E4A66", "#7A4A10"),
+    "ice": ("#1C5FB8", "#4FA3E0", "#1C6FB0", "#3E4A66", "#2A4F80"),
+    "toxic": ("#0E7A3A", "#B86A00", "#3A7A1A", "#3E4A66", "#2A6A2A"),
+    "blood": ("#8E0B1A", "#A3520F", "#8E0B1A", "#3E4A66", "#6A1A1A"),
+}
+
 block = ""
 for i, (name, bomj, lsh, title, tg, tsh, slogan, sc, ssh, tail, tc, bolt, legacy) in enumerate(V, 1):
     on = i == active
+    lsh, tsh, ssh, tailsh, sksh = SH[name]
+    skull = "<shadow:%s:1><#D8D8D8>☠</#D8D8D8></shadow>" % sksh
     logo = sh(lsh, grad(bomj[0], bomj[1], "BOMJ") + "<#FFFFFF>PVP</#FFFFFF>")
     head = sh(tsh, grad(tg[0], tg[1], title))
-    line2 = sh(ssh, "<%s>%s</%s>" % (sc, slogan, sc)) + " <%s>· %s</%s>" % (tc, tail, tc)
-    b = "<%s>⚡</%s>" % (bolt, bolt)
+    line2 = sh(ssh, "<%s>%s</%s>" % (sc, slogan, sc)) + " <shadow:%s:1><%s>· %s</%s></shadow>" % (tailsh, tc, tail, tc)
+    b = "<shadow:%s:1><%s>⚡</%s></shadow>" % (tsh, bolt, bolt)
     lines = {
-        "": (("773+" if on else "off"), TNT + " " + SK + " " + logo + " " + SK + " " + TNT + "  " + head + "{NL}" + line2),
-        "_smooth": (("769-772" if on else "off"), b + " " + SK + " " + logo + " " + SK + " " + b + "  " + head + "{NL}" + line2),
+        "": (("773+" if on else "off"), TNT + " " + skull + " " + logo + " " + skull + " " + TNT + "  " + head + "{NL}" + line2),
+        "_smooth": (("769-772" if on else "off"), b + " " + skull + " " + logo + " " + skull + " " + b + "  " + head + "{NL}" + line2),
         "_legacy": (("-768" if on else "off"),
                     "<{0}>⚡</{0}> <gray>☠</gray> <bold><{0}>BOMJ</{0}><white>PVP</white></bold> <gray>☠</gray> <{0}>⚡</{0}>  "
                     "<bold><{1}>{3}</{1}></bold>{{NL}}<bold><{2}>{4}</{2}></bold> <gray>· {5}</gray>".format(

@@ -76,7 +76,7 @@ main:
       protocols: "off"
       center: true
       descriptions:
-        - "<sprite:block/tnt_side> <#D8D8D8>☠</#D8D8D8> <shadow:#2A0A45:1><bold><gradient:#FF5BD6:#B06BFF>BOMJ</gradient><#FFFFFF>PVP</#FFFFFF></bold></shadow> <#D8D8D8>☠</#D8D8D8> <sprite:block/tnt_side>  <shadow:#062740:1><bold><gradient:#6CF0FF:#4FA8FF>БОМЖ-ГОРОД</gradient></bold></shadow>{NL}<shadow:#2A0A45:1><bold><#FFFFFF>ВЫБЕЙСЯ В ЛЮДИ</#FFFFFF></bold></shadow> <#A9A3C2>· кланы · кейсы · PvP</#A9A3C2>"
+        - "<sprite:block/tnt_side> <shadow:#5A3A90:1><#D8D8D8>☠</#D8D8D8></shadow> <shadow:#7A1FD1:1><bold><gradient:#FF5BD6:#B06BFF>BOMJ</gradient><#FFFFFF>PVP</#FFFFFF></bold></shadow> <shadow:#5A3A90:1><#D8D8D8>☠</#D8D8D8></shadow> <sprite:block/tnt_side>  <shadow:#1F4FD1:1><bold><gradient:#6CF0FF:#4FA8FF>БОМЖ-ГОРОД</gradient></bold></shadow>{NL}<shadow:#6A2AC0:1><bold><#FFFFFF>ВЫБЕЙСЯ В ЛЮДИ</#FFFFFF></bold></shadow> <shadow:#3E4A66:1><#A9A3C2>· кланы · кейсы · PvP</#A9A3C2></shadow>"
       favicons:
         - "aura/aura-purple.png"
         - "aura/aura-cyan.png"
@@ -89,7 +89,7 @@ main:
       protocols: "off"
       center: true
       descriptions:
-        - "<#6CF0FF>⚡</#6CF0FF> <#D8D8D8>☠</#D8D8D8> <shadow:#2A0A45:1><bold><gradient:#FF5BD6:#B06BFF>BOMJ</gradient><#FFFFFF>PVP</#FFFFFF></bold></shadow> <#D8D8D8>☠</#D8D8D8> <#6CF0FF>⚡</#6CF0FF>  <shadow:#062740:1><bold><gradient:#6CF0FF:#4FA8FF>БОМЖ-ГОРОД</gradient></bold></shadow>{NL}<shadow:#2A0A45:1><bold><#FFFFFF>ВЫБЕЙСЯ В ЛЮДИ</#FFFFFF></bold></shadow> <#A9A3C2>· кланы · кейсы · PvP</#A9A3C2>"
+        - "<shadow:#1F4FD1:1><#6CF0FF>⚡</#6CF0FF></shadow> <shadow:#5A3A90:1><#D8D8D8>☠</#D8D8D8></shadow> <shadow:#7A1FD1:1><bold><gradient:#FF5BD6:#B06BFF>BOMJ</gradient><#FFFFFF>PVP</#FFFFFF></bold></shadow> <shadow:#5A3A90:1><#D8D8D8>☠</#D8D8D8></shadow> <shadow:#1F4FD1:1><#6CF0FF>⚡</#6CF0FF></shadow>  <shadow:#1F4FD1:1><bold><gradient:#6CF0FF:#4FA8FF>БОМЖ-ГОРОД</gradient></bold></shadow>{NL}<shadow:#6A2AC0:1><bold><#FFFFFF>ВЫБЕЙСЯ В ЛЮДИ</#FFFFFF></bold></shadow> <shadow:#3E4A66:1><#A9A3C2>· кланы · кейсы · PvP</#A9A3C2></shadow>"
       favicons:
         - "aura/aura-purple.png"
         - "aura/aura-cyan.png"
@@ -115,7 +115,7 @@ main:
       protocols: "off"
       center: true
       descriptions:
-        - "<sprite:block/tnt_side> <#D8D8D8>☠</#D8D8D8> <shadow:#3A2200:1><bold><gradient:#FFE27A:#FFAA2E>BOMJ</gradient><#FFFFFF>PVP</#FFFFFF></bold></shadow> <#D8D8D8>☠</#D8D8D8> <sprite:block/tnt_side>  <shadow:#3A0C00:1><bold><gradient:#FF7A4A:#FF4A3D>КЕЙСЫ ЖДУТ</gradient></bold></shadow>{NL}<shadow:#3A2200:1><bold><#FFF1CF>ОТ ПОМОЙКИ К ТРОНУ</#FFF1CF></bold></shadow> <#B8AD93>· заходи</#B8AD93>"
+        - "<sprite:block/tnt_side> <shadow:#7A4A10:1><#D8D8D8>☠</#D8D8D8></shadow> <shadow:#B4500A:1><bold><gradient:#FFE27A:#FFAA2E>BOMJ</gradient><#FFFFFF>PVP</#FFFFFF></bold></shadow> <shadow:#7A4A10:1><#D8D8D8>☠</#D8D8D8></shadow> <sprite:block/tnt_side>  <shadow:#8A0F2A:1><bold><gradient:#FF7A4A:#FF4A3D>КЕЙСЫ ЖДУТ</gradient></bold></shadow>{NL}<shadow:#9A5A10:1><bold><#FFF1CF>ОТ ПОМОЙКИ К ТРОНУ</#FFF1CF></bold></shadow> <shadow:#3E4A66:1><#B8AD93>· заходи</#B8AD93></shadow>"
       favicons:
         - "aura/aura-purple.png"
         - "aura/aura-cyan.png"
@@ -128,7 +128,7 @@ main:
       protocols: "off"
       center: true
       descriptions:
-        - "<#FFAA2E>⚡</#FFAA2E> <#D8D8D8>☠</#D8D8D8> <shadow:#3A2200:1><bold><gradient:#FFE27A:#FFAA2E>BOMJ</gradient><#FFFFFF>PVP</#FFFFFF></bold></shadow> <#D8D8D8>☠</#D8D8D8> <#FFAA2E>⚡</#FFAA2E>  <shadow:#3A0C00:1><bold><gradient:#FF7A4A:#FF4A3D>КЕЙСЫ ЖДУТ</gradient></bold></shadow>{NL}<shadow:#3A2200:1><bold><#FFF1CF>ОТ ПОМОЙКИ К ТРОНУ</#FFF1CF></bold></shadow> <#B8AD93>· заходи</#B8AD93>"
+        - "<shadow:#8A0F2A:1><#FFAA2E>⚡</#FFAA2E></shadow> <shadow:#7A4A10:1><#D8D8D8>☠</#D8D8D8></shadow> <shadow:#B4500A:1><bold><gradient:#FFE27A:#FFAA2E>BOMJ</gradient><#FFFFFF>PVP</#FFFFFF></bold></shadow> <shadow:#7A4A10:1><#D8D8D8>☠</#D8D8D8></shadow> <shadow:#8A0F2A:1><#FFAA2E>⚡</#FFAA2E></shadow>  <shadow:#8A0F2A:1><bold><gradient:#FF7A4A:#FF4A3D>КЕЙСЫ ЖДУТ</gradient></bold></shadow>{NL}<shadow:#9A5A10:1><bold><#FFF1CF>ОТ ПОМОЙКИ К ТРОНУ</#FFF1CF></bold></shadow> <shadow:#3E4A66:1><#B8AD93>· заходи</#B8AD93></shadow>"
       favicons:
         - "aura/aura-purple.png"
         - "aura/aura-cyan.png"
@@ -154,7 +154,7 @@ main:
       protocols: "off"
       center: true
       descriptions:
-        - "<sprite:block/tnt_side> <#D8D8D8>☠</#D8D8D8> <shadow:#0A2240:1><bold><gradient:#9BEBFF:#4FB2FF>BOMJ</gradient><#FFFFFF>PVP</#FFFFFF></bold></shadow> <#D8D8D8>☠</#D8D8D8> <sprite:block/tnt_side>  <shadow:#0A2240:1><bold><gradient:#FFFFFF:#CFEFFF>ДЕРЖИ РАЙОН</gradient></bold></shadow>{NL}<shadow:#08263A:1><bold><#BFF1FF>СОБЕРИ БАНДУ</#BFF1FF></bold></shadow> <#93A7BC>· захвати точки</#93A7BC>"
+        - "<sprite:block/tnt_side> <shadow:#2A4F80:1><#D8D8D8>☠</#D8D8D8></shadow> <shadow:#1C5FB8:1><bold><gradient:#9BEBFF:#4FB2FF>BOMJ</gradient><#FFFFFF>PVP</#FFFFFF></bold></shadow> <shadow:#2A4F80:1><#D8D8D8>☠</#D8D8D8></shadow> <sprite:block/tnt_side>  <shadow:#4FA3E0:1><bold><gradient:#FFFFFF:#CFEFFF>ДЕРЖИ РАЙОН</gradient></bold></shadow>{NL}<shadow:#1C6FB0:1><bold><#BFF1FF>СОБЕРИ БАНДУ</#BFF1FF></bold></shadow> <shadow:#3E4A66:1><#93A7BC>· захвати точки</#93A7BC></shadow>"
       favicons:
         - "aura/aura-purple.png"
         - "aura/aura-cyan.png"
@@ -167,7 +167,7 @@ main:
       protocols: "off"
       center: true
       descriptions:
-        - "<#9BEBFF>⚡</#9BEBFF> <#D8D8D8>☠</#D8D8D8> <shadow:#0A2240:1><bold><gradient:#9BEBFF:#4FB2FF>BOMJ</gradient><#FFFFFF>PVP</#FFFFFF></bold></shadow> <#D8D8D8>☠</#D8D8D8> <#9BEBFF>⚡</#9BEBFF>  <shadow:#0A2240:1><bold><gradient:#FFFFFF:#CFEFFF>ДЕРЖИ РАЙОН</gradient></bold></shadow>{NL}<shadow:#08263A:1><bold><#BFF1FF>СОБЕРИ БАНДУ</#BFF1FF></bold></shadow> <#93A7BC>· захвати точки</#93A7BC>"
+        - "<shadow:#4FA3E0:1><#9BEBFF>⚡</#9BEBFF></shadow> <shadow:#2A4F80:1><#D8D8D8>☠</#D8D8D8></shadow> <shadow:#1C5FB8:1><bold><gradient:#9BEBFF:#4FB2FF>BOMJ</gradient><#FFFFFF>PVP</#FFFFFF></bold></shadow> <shadow:#2A4F80:1><#D8D8D8>☠</#D8D8D8></shadow> <shadow:#4FA3E0:1><#9BEBFF>⚡</#9BEBFF></shadow>  <shadow:#4FA3E0:1><bold><gradient:#FFFFFF:#CFEFFF>ДЕРЖИ РАЙОН</gradient></bold></shadow>{NL}<shadow:#1C6FB0:1><bold><#BFF1FF>СОБЕРИ БАНДУ</#BFF1FF></bold></shadow> <shadow:#3E4A66:1><#93A7BC>· захвати точки</#93A7BC></shadow>"
       favicons:
         - "aura/aura-purple.png"
         - "aura/aura-cyan.png"
@@ -193,7 +193,7 @@ main:
       protocols: "off"
       center: true
       descriptions:
-        - "<sprite:block/tnt_side> <#D8D8D8>☠</#D8D8D8> <shadow:#0E2E00:1><bold><gradient:#D2FF4A:#4CFF7A>BOMJ</gradient><#FFFFFF>PVP</#FFFFFF></bold></shadow> <#D8D8D8>☠</#D8D8D8> <sprite:block/tnt_side>  <shadow:#3A2600:1><bold><gradient:#FFE14A:#FFB300>ЛАКИ-БЛОКИ</gradient></bold></shadow>{NL}<shadow:#0E2E00:1><bold><#F2FFE0>ЛОМАЙ И ЛУТАЙ</#F2FFE0></bold></shadow> <#A3B39A>· богатей с нуля</#A3B39A>"
+        - "<sprite:block/tnt_side> <shadow:#2A6A2A:1><#D8D8D8>☠</#D8D8D8></shadow> <shadow:#0E7A3A:1><bold><gradient:#D2FF4A:#4CFF7A>BOMJ</gradient><#FFFFFF>PVP</#FFFFFF></bold></shadow> <shadow:#2A6A2A:1><#D8D8D8>☠</#D8D8D8></shadow> <sprite:block/tnt_side>  <shadow:#B86A00:1><bold><gradient:#FFE14A:#FFB300>ЛАКИ-БЛОКИ</gradient></bold></shadow>{NL}<shadow:#3A7A1A:1><bold><#F2FFE0>ЛОМАЙ И ЛУТАЙ</#F2FFE0></bold></shadow> <shadow:#3E4A66:1><#A3B39A>· богатей с нуля</#A3B39A></shadow>"
       favicons:
         - "aura/aura-purple.png"
         - "aura/aura-cyan.png"
@@ -206,7 +206,7 @@ main:
       protocols: "off"
       center: true
       descriptions:
-        - "<#D2FF4A>⚡</#D2FF4A> <#D8D8D8>☠</#D8D8D8> <shadow:#0E2E00:1><bold><gradient:#D2FF4A:#4CFF7A>BOMJ</gradient><#FFFFFF>PVP</#FFFFFF></bold></shadow> <#D8D8D8>☠</#D8D8D8> <#D2FF4A>⚡</#D2FF4A>  <shadow:#3A2600:1><bold><gradient:#FFE14A:#FFB300>ЛАКИ-БЛОКИ</gradient></bold></shadow>{NL}<shadow:#0E2E00:1><bold><#F2FFE0>ЛОМАЙ И ЛУТАЙ</#F2FFE0></bold></shadow> <#A3B39A>· богатей с нуля</#A3B39A>"
+        - "<shadow:#B86A00:1><#D2FF4A>⚡</#D2FF4A></shadow> <shadow:#2A6A2A:1><#D8D8D8>☠</#D8D8D8></shadow> <shadow:#0E7A3A:1><bold><gradient:#D2FF4A:#4CFF7A>BOMJ</gradient><#FFFFFF>PVP</#FFFFFF></bold></shadow> <shadow:#2A6A2A:1><#D8D8D8>☠</#D8D8D8></shadow> <shadow:#B86A00:1><#D2FF4A>⚡</#D2FF4A></shadow>  <shadow:#B86A00:1><bold><gradient:#FFE14A:#FFB300>ЛАКИ-БЛОКИ</gradient></bold></shadow>{NL}<shadow:#3A7A1A:1><bold><#F2FFE0>ЛОМАЙ И ЛУТАЙ</#F2FFE0></bold></shadow> <shadow:#3E4A66:1><#A3B39A>· богатей с нуля</#A3B39A></shadow>"
       favicons:
         - "aura/aura-purple.png"
         - "aura/aura-cyan.png"
@@ -232,7 +232,7 @@ main:
       protocols: "off"
       center: true
       descriptions:
-        - "<sprite:block/tnt_side> <#D8D8D8>☠</#D8D8D8> <shadow:#3A0006:1><bold><gradient:#FF6A55:#FF2E3A>BOMJ</gradient><#FFFFFF>PVP</#FFFFFF></bold></shadow> <#D8D8D8>☠</#D8D8D8> <sprite:block/tnt_side>  <shadow:#3A2400:1><bold><gradient:#FFD85A:#FFB12E>СТАНЬ КОРОЛЁМ</gradient></bold></shadow>{NL}<shadow:#3A0006:1><bold><#FFFFFF>ИЗ БОМЖА В МАЖОРЫ</#FFFFFF></bold></shadow> <#B3A3A3>· за один вечер</#B3A3A3>"
+        - "<sprite:block/tnt_side> <shadow:#6A1A1A:1><#D8D8D8>☠</#D8D8D8></shadow> <shadow:#8E0B1A:1><bold><gradient:#FF6A55:#FF2E3A>BOMJ</gradient><#FFFFFF>PVP</#FFFFFF></bold></shadow> <shadow:#6A1A1A:1><#D8D8D8>☠</#D8D8D8></shadow> <sprite:block/tnt_side>  <shadow:#A3520F:1><bold><gradient:#FFD85A:#FFB12E>СТАНЬ КОРОЛЁМ</gradient></bold></shadow>{NL}<shadow:#8E0B1A:1><bold><#FFFFFF>ИЗ БОМЖА В МАЖОРЫ</#FFFFFF></bold></shadow> <shadow:#3E4A66:1><#B3A3A3>· за один вечер</#B3A3A3></shadow>"
       favicons:
         - "aura/aura-purple.png"
         - "aura/aura-cyan.png"
@@ -245,7 +245,7 @@ main:
       protocols: "off"
       center: true
       descriptions:
-        - "<#FF6A55>⚡</#FF6A55> <#D8D8D8>☠</#D8D8D8> <shadow:#3A0006:1><bold><gradient:#FF6A55:#FF2E3A>BOMJ</gradient><#FFFFFF>PVP</#FFFFFF></bold></shadow> <#D8D8D8>☠</#D8D8D8> <#FF6A55>⚡</#FF6A55>  <shadow:#3A2400:1><bold><gradient:#FFD85A:#FFB12E>СТАНЬ КОРОЛЁМ</gradient></bold></shadow>{NL}<shadow:#3A0006:1><bold><#FFFFFF>ИЗ БОМЖА В МАЖОРЫ</#FFFFFF></bold></shadow> <#B3A3A3>· за один вечер</#B3A3A3>"
+        - "<shadow:#A3520F:1><#FF6A55>⚡</#FF6A55></shadow> <shadow:#6A1A1A:1><#D8D8D8>☠</#D8D8D8></shadow> <shadow:#8E0B1A:1><bold><gradient:#FF6A55:#FF2E3A>BOMJ</gradient><#FFFFFF>PVP</#FFFFFF></bold></shadow> <shadow:#6A1A1A:1><#D8D8D8>☠</#D8D8D8></shadow> <shadow:#A3520F:1><#FF6A55>⚡</#FF6A55></shadow>  <shadow:#A3520F:1><bold><gradient:#FFD85A:#FFB12E>СТАНЬ КОРОЛЁМ</gradient></bold></shadow>{NL}<shadow:#8E0B1A:1><bold><#FFFFFF>ИЗ БОМЖА В МАЖОРЫ</#FFFFFF></bold></shadow> <shadow:#3E4A66:1><#B3A3A3>· за один вечер</#B3A3A3></shadow>"
       favicons:
         - "aura/aura-purple.png"
         - "aura/aura-cyan.png"
