@@ -21,15 +21,15 @@ def grad(a, b, text):
 # name, BOMJ (from, to), logo shadow, title, title (from, to), title shadow, slogan, slogan color, slogan shadow,
 # tail, tail color, bolt color, legacy (logo, title, slogan) named colors
 V = [
-    ("neon", ("#FF5BD6", "#B06BFF"), "#2A0A45", "БОМЖ-ГОРОД", ("#6CF0FF", "#4FA8FF"), "#062740",
-     "ВЫБЕЙСЯ В ЛЮДИ", "#FFFFFF", "#2A0A45", "кланы · кейсы · PvP", "#A9A3C2", "#6CF0FF", ("light_purple", "aqua", "white")),
-    ("gold", ("#FFE27A", "#FFAA2E"), "#3A2200", "КЕЙСЫ ЖДУТ", ("#FF7A4A", "#FF4A3D"), "#3A0C00",
+    ("neon", ("#FF7BE0", "#C08BFF"), "#2A0A45", "БОМЖ-ГОРОД", ("#6CF0FF", "#4FA8FF"), "#062740",
+     "ВЫБЕЙСЯ В ЛЮДИ", "#E2CCFF", "#2A0A45", "кланы · кейсы · PvP", "#A9A3C2", "#6CF0FF", ("light_purple", "aqua", "white")),
+    ("gold", ("#FFE89A", "#FFBC52"), "#3A2200", "КЕЙСЫ ЖДУТ", ("#FF7A4A", "#FF4A3D"), "#3A0C00",
      "ОТ ПОМОЙКИ К ТРОНУ", "#FFF1CF", "#3A2200", "заходи", "#B8AD93", "#FFAA2E", ("gold", "red", "yellow")),
-    ("ice", ("#9BEBFF", "#4FB2FF"), "#0A2240", "ДЕРЖИ РАЙОН", ("#FFFFFF", "#CFEFFF"), "#0A2240",
-     "СОБЕРИ БАНДУ", "#BFF1FF", "#08263A", "захвати точки", "#93A7BC", "#9BEBFF", ("aqua", "white", "aqua")),
-    ("toxic", ("#D2FF4A", "#4CFF7A"), "#0E2E00", "ЛАКИ-БЛОКИ", ("#FFE14A", "#FFB300"), "#3A2600",
+    ("ice", ("#B2F0FF", "#74C4FF"), "#0A2240", "ДЕРЖИ РАЙОН", ("#FFFFFF", "#CFEFFF"), "#0A2240",
+     "СОБЕРИ БАНДУ", "#D2F2FF", "#08263A", "захвати точки", "#93A7BC", "#9BEBFF", ("aqua", "white", "aqua")),
+    ("toxic", ("#DCFF70", "#74FF96"), "#0E2E00", "ЛАКИ-БЛОКИ", ("#FFE14A", "#FFB300"), "#3A2600",
      "ЛОМАЙ И ЛУТАЙ", "#F2FFE0", "#0E2E00", "богатей с нуля", "#A3B39A", "#D2FF4A", ("green", "yellow", "white")),
-    ("blood", ("#FF6A55", "#FF2E3A"), "#3A0006", "СТАНЬ КОРОЛЁМ", ("#FFD85A", "#FFB12E"), "#3A2400",
+    ("blood", ("#FF8574", "#FF5A62"), "#3A0006", "СТАНЬ КОРОЛЁМ", ("#FFD85A", "#FFB12E"), "#3A2400",
      "ИЗ БОМЖА В МАЖОРЫ", "#FFFFFF", "#3A0006", "за один вечер", "#B3A3A3", "#FF6A55", ("red", "gold", "white")),
 ]
 
@@ -37,12 +37,12 @@ favs = re.search(r"    wipe:\n(?:      .*\n|        - .*\n)*?      favicons:\n((
 favicons = favs.group(1) if favs else ""
 
 # visible colored shadows: a deeper, saturated tone of each element (logo, title, slogan, tail, skull/bolt)
-SH = {
-    "neon": ("#7A1FD1", "#1F4FD1", "#6A2AC0", "#3E4A66", "#5A3A90"),
-    "gold": ("#B4500A", "#8A0F2A", "#9A5A10", "#3E4A66", "#7A4A10"),
-    "ice": ("#1C5FB8", "#4FA3E0", "#1C6FB0", "#3E4A66", "#2A4F80"),
-    "toxic": ("#0E7A3A", "#B86A00", "#3A7A1A", "#3E4A66", "#2A6A2A"),
-    "blood": ("#8E0B1A", "#A3520F", "#8E0B1A", "#3E4A66", "#6A1A1A"),
+SH = {  # very dark tone of the element's hue (V ~0.2): color shows, letter edges stay crisp
+    "neon": ("#2A0A4A", "#0A1E4A", "#2A0A4A", "#1C2030", "#241838"),
+    "gold": ("#3A2006", "#3A0610", "#3A2006", "#1C2030", "#2E1E08"),
+    "ice": ("#0A1E4A", "#0A2A4A", "#0A1E4A", "#1C2030", "#121E38"),
+    "toxic": ("#06301A", "#3A2006", "#06301A", "#1C2030", "#102A12"),
+    "blood": ("#3A0610", "#3A2006", "#3A0610", "#1C2030", "#300A0A"),
 }
 
 block = ""
