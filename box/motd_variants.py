@@ -68,7 +68,45 @@ for i, (name, bomj, lsh, title, tg, tsh, slogan, sc, ssh, tail, tc, bolt, legacy
         block += ("      favicons:\n" + favicons) if favicons else "      favicons: []\n"
         block += "      information: []\n"
 
-s = re.sub(r"    motd\d_[a-z_]+:\n(?:      .*\n|        - .*\n)+", "", s)
+# --- style 2 (variants 6..10): one hue, symbols around BOMJPVP, slogan between two strike-through lines ---
+TABLE = open("/home/bomj/src/FastMOTD/src/main/resources/fastmotd/glyph-widths.bin", "rb").read()
+
+
+def width(text, bold=False):
+    w = 0
+    for ch in text:
+        v = TABLE[ord(ch)] if ord(ch) < 65536 else 0
+        w += 12 if v == 0 else (v & 0x7F) + ((1 if v & 0x80 else 2) if bold else 0)
+    return w / 2
+
+
+# name, symbol, BOMJ, PVP, text shadow, slogan, slogan color, line color, line shadow, legacy (logo, slogan, line)
+V2 = [
+    ("crimson", "☠", "#FF5A6A", "#FFB3BC", "#3A0610", "Город бомжей", "#FFD0D5", "#B8283C", "#2A0408", ("red", "white", "dark_red")),
+    ("violet", "✦", "#C78BFF", "#E9D6FF", "#24083E", "Начни с помойки", "#EFE3FF", "#7A44C0", "#1A062E", ("light_purple", "white", "dark_purple")),
+    ("goldline", "⚔", "#FFC94A", "#FFE9A8", "#3A2406", "Кланы · кейсы · лаки-блоки", "#FFF2D2", "#A87A1A", "#2A1A04", ("gold", "yellow", "gold")),
+    ("mint", "❖", "#4FFFD0", "#BFFFEF", "#063A2E", "Держи свой район", "#DBFFF5", "#1E9A7C", "#042A20", ("aqua", "white", "dark_aqua")),
+    ("frost", "❄", "#8FD8FF", "#E0F4FF", "#0A2440", "Из бомжа в короли", "#E8F7FF", "#3C82B8", "#081A30", ("aqua", "white", "blue")),
+]
+LINE2_TARGET = 210  # px: slogan + both lines, wider than line 1 like the reference
+
+for k, (name, sym, c1, c2, shc, slogan, sc, lc, lsh, leg) in enumerate(V2, 6):
+    on = k == active
+    n = max(4, int((LINE2_TARGET - width(slogan) - 8) / 2 / 4))
+    bar = " " * n
+    l1 = ("<shadow:{sh}:1><{c1}>{sym}</{c1}></shadow>  <shadow:{sh}:1><bold><{c1}>BOMJ</{c1}><{c2}>PVP</{c2}></bold></shadow>"
+          "  <shadow:{sh}:1><{c1}>{sym}</{c1}></shadow>").format(sh=shc, c1=c1, c2=c2, sym=sym)
+    line = "<shadow:%s:1><%s><st>%s</st></%s></shadow>" % (lsh, lc, bar, lc)
+    l2 = line + " <shadow:%s:1><%s>%s</%s></shadow> " % (shc, sc, slogan, sc) + line
+    legacy = ("<{0}>{3}</{0}>  <bold><{0}>BOMJ</{0}><white>PVP</white></bold>  <{0}>{3}</{0}>{{NL}}"
+              "<{2}><st>{5}</st></{2}> <{1}>{4}</{1}> <{2}><st>{5}</st></{2}>").format(leg[0], leg[1], leg[2], sym, slogan, bar)
+    for suffix, proto, desc in (("", "769+", l1 + "{NL}" + l2), ("_legacy", "-768", legacy)):
+        block += '    motd%d_%s%s:\n      protocols: "%s"\n      center: true\n      descriptions:\n        - "%s"\n' % (
+            k, name, suffix, proto if on else "off", desc.replace('"', '\\"'))
+        block += ("      favicons:\n" + favicons) if favicons else "      favicons: []\n"
+        block += "      information: []\n"
+
+s = re.sub(r"    motd\d+_[a-z_]+:\n(?:      .*\n|        - .*\n)+", "", s)
 if active:
     # live tiers stay in the file but are switched off on the preview proxies
     s = re.sub(r"(\n    wipe[a-z_]*:\n      protocols: )\"[^\"]*\"", r'\1"off"', s)

@@ -267,6 +267,136 @@ main:
         - "aura/aura-red.png"
         - "aura/aura-pink.png"
       information: []
+    motd6_crimson:
+      protocols: "off"
+      center: true
+      descriptions:
+        - "<shadow:#3A0610:1><#FF5A6A>☠</#FF5A6A></shadow>  <shadow:#3A0610:1><bold><#FF5A6A>BOMJ</#FF5A6A><#FFB3BC>PVP</#FFB3BC></bold></shadow>  <shadow:#3A0610:1><#FF5A6A>☠</#FF5A6A></shadow>{NL}<shadow:#2A0408:1><#B8283C><st>                </st></#B8283C></shadow> <shadow:#3A0610:1><#FFD0D5>Город бомжей</#FFD0D5></shadow> <shadow:#2A0408:1><#B8283C><st>                </st></#B8283C></shadow>"
+      favicons:
+        - "aura/aura-purple.png"
+        - "aura/aura-cyan.png"
+        - "aura/aura-gold.png"
+        - "aura/aura-toxic.png"
+        - "aura/aura-red.png"
+        - "aura/aura-pink.png"
+      information: []
+    motd6_crimson_legacy:
+      protocols: "off"
+      center: true
+      descriptions:
+        - "<red>☠</red>  <bold><red>BOMJ</red><white>PVP</white></bold>  <red>☠</red>{NL}<dark_red><st>                </st></dark_red> <white>Город бомжей</white> <dark_red><st>                </st></dark_red>"
+      favicons:
+        - "aura/aura-purple.png"
+        - "aura/aura-cyan.png"
+        - "aura/aura-gold.png"
+        - "aura/aura-toxic.png"
+        - "aura/aura-red.png"
+        - "aura/aura-pink.png"
+      information: []
+    motd7_violet:
+      protocols: "off"
+      center: true
+      descriptions:
+        - "<shadow:#24083E:1><#C78BFF>✦</#C78BFF></shadow>  <shadow:#24083E:1><bold><#C78BFF>BOMJ</#C78BFF><#E9D6FF>PVP</#E9D6FF></bold></shadow>  <shadow:#24083E:1><#C78BFF>✦</#C78BFF></shadow>{NL}<shadow:#1A062E:1><#7A44C0><st>              </st></#7A44C0></shadow> <shadow:#24083E:1><#EFE3FF>Начни с помойки</#EFE3FF></shadow> <shadow:#1A062E:1><#7A44C0><st>              </st></#7A44C0></shadow>"
+      favicons:
+        - "aura/aura-purple.png"
+        - "aura/aura-cyan.png"
+        - "aura/aura-gold.png"
+        - "aura/aura-toxic.png"
+        - "aura/aura-red.png"
+        - "aura/aura-pink.png"
+      information: []
+    motd7_violet_legacy:
+      protocols: "off"
+      center: true
+      descriptions:
+        - "<light_purple>✦</light_purple>  <bold><light_purple>BOMJ</light_purple><white>PVP</white></bold>  <light_purple>✦</light_purple>{NL}<dark_purple><st>              </st></dark_purple> <white>Начни с помойки</white> <dark_purple><st>              </st></dark_purple>"
+      favicons:
+        - "aura/aura-purple.png"
+        - "aura/aura-cyan.png"
+        - "aura/aura-gold.png"
+        - "aura/aura-toxic.png"
+        - "aura/aura-red.png"
+        - "aura/aura-pink.png"
+      information: []
+    motd8_goldline:
+      protocols: "off"
+      center: true
+      descriptions:
+        - "<shadow:#3A2406:1><#FFC94A>⚔</#FFC94A></shadow>  <shadow:#3A2406:1><bold><#FFC94A>BOMJ</#FFC94A><#FFE9A8>PVP</#FFE9A8></bold></shadow>  <shadow:#3A2406:1><#FFC94A>⚔</#FFC94A></shadow>{NL}<shadow:#2A1A04:1><#A87A1A><st>       </st></#A87A1A></shadow> <shadow:#3A2406:1><#FFF2D2>Кланы · кейсы · лаки-блоки</#FFF2D2></shadow> <shadow:#2A1A04:1><#A87A1A><st>       </st></#A87A1A></shadow>"
+      favicons:
+        - "aura/aura-purple.png"
+        - "aura/aura-cyan.png"
+        - "aura/aura-gold.png"
+        - "aura/aura-toxic.png"
+        - "aura/aura-red.png"
+        - "aura/aura-pink.png"
+      information: []
+    motd8_goldline_legacy:
+      protocols: "off"
+      center: true
+      descriptions:
+        - "<gold>⚔</gold>  <bold><gold>BOMJ</gold><white>PVP</white></bold>  <gold>⚔</gold>{NL}<gold><st>       </st></gold> <yellow>Кланы · кейсы · лаки-блоки</yellow> <gold><st>       </st></gold>"
+      favicons:
+        - "aura/aura-purple.png"
+        - "aura/aura-cyan.png"
+        - "aura/aura-gold.png"
+        - "aura/aura-toxic.png"
+        - "aura/aura-red.png"
+        - "aura/aura-pink.png"
+      information: []
+    motd9_mint:
+      protocols: "off"
+      center: true
+      descriptions:
+        - "<shadow:#063A2E:1><#4FFFD0>❖</#4FFFD0></shadow>  <shadow:#063A2E:1><bold><#4FFFD0>BOMJ</#4FFFD0><#BFFFEF>PVP</#BFFFEF></bold></shadow>  <shadow:#063A2E:1><#4FFFD0>❖</#4FFFD0></shadow>{NL}<shadow:#042A20:1><#1E9A7C><st>             </st></#1E9A7C></shadow> <shadow:#063A2E:1><#DBFFF5>Держи свой район</#DBFFF5></shadow> <shadow:#042A20:1><#1E9A7C><st>             </st></#1E9A7C></shadow>"
+      favicons:
+        - "aura/aura-purple.png"
+        - "aura/aura-cyan.png"
+        - "aura/aura-gold.png"
+        - "aura/aura-toxic.png"
+        - "aura/aura-red.png"
+        - "aura/aura-pink.png"
+      information: []
+    motd9_mint_legacy:
+      protocols: "off"
+      center: true
+      descriptions:
+        - "<aqua>❖</aqua>  <bold><aqua>BOMJ</aqua><white>PVP</white></bold>  <aqua>❖</aqua>{NL}<dark_aqua><st>             </st></dark_aqua> <white>Держи свой район</white> <dark_aqua><st>             </st></dark_aqua>"
+      favicons:
+        - "aura/aura-purple.png"
+        - "aura/aura-cyan.png"
+        - "aura/aura-gold.png"
+        - "aura/aura-toxic.png"
+        - "aura/aura-red.png"
+        - "aura/aura-pink.png"
+      information: []
+    motd10_frost:
+      protocols: "off"
+      center: true
+      descriptions:
+        - "<shadow:#0A2440:1><#8FD8FF>❄</#8FD8FF></shadow>  <shadow:#0A2440:1><bold><#8FD8FF>BOMJ</#8FD8FF><#E0F4FF>PVP</#E0F4FF></bold></shadow>  <shadow:#0A2440:1><#8FD8FF>❄</#8FD8FF></shadow>{NL}<shadow:#081A30:1><#3C82B8><st>             </st></#3C82B8></shadow> <shadow:#0A2440:1><#E8F7FF>Из бомжа в короли</#E8F7FF></shadow> <shadow:#081A30:1><#3C82B8><st>             </st></#3C82B8></shadow>"
+      favicons:
+        - "aura/aura-purple.png"
+        - "aura/aura-cyan.png"
+        - "aura/aura-gold.png"
+        - "aura/aura-toxic.png"
+        - "aura/aura-red.png"
+        - "aura/aura-pink.png"
+      information: []
+    motd10_frost_legacy:
+      protocols: "off"
+      center: true
+      descriptions:
+        - "<aqua>❄</aqua>  <bold><aqua>BOMJ</aqua><white>PVP</white></bold>  <aqua>❄</aqua>{NL}<blue><st>             </st></blue> <white>Из бомжа в короли</white> <blue><st>             </st></blue>"
+      favicons:
+        - "aura/aura-purple.png"
+        - "aura/aura-cyan.png"
+        - "aura/aura-gold.png"
+        - "aura/aura-toxic.png"
+        - "aura/aura-red.png"
+        - "aura/aura-pink.png"
+      information: []
     wipe:
       protocols: "773+"
       center: false

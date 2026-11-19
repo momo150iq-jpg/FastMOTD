@@ -116,7 +116,7 @@ def runs(c, st, out):
             runs(x, st, out)
         return
     st = dict(st)
-    for k in ("color", "bold", "font", "shadow_color"):
+    for k in ("color", "bold", "font", "shadow_color", "strikethrough"):
         if k in c:
             st[k] = c[k]
     if "sprite" in c:
@@ -179,8 +179,20 @@ def draw_text(canvas, x, y, comp, base="#AAAAAA"):
                 canvas.alpha_composite(sh, (int((cx + dx + 1) * S), int((cy + g.top + 1) * S)))
             for dx in offs:
                 canvas.alpha_composite(fg, (int((cx + dx) * S), int((cy + g.top) * S)))
-            cx += g.adv + (g.bold_off if bold else 0)
+            adv = g.adv + (g.bold_off if bold else 0)
+            if st.get("strikethrough"):
+                bar = Image.new("RGBA", (max(1, int((adv + 1) * S)), S), (255, 255, 255, 255))
+                canvas.alpha_composite(sh_bar(bar, st, c), (int((cx - 1 + 1) * S), int((cy + 3.5 + 1) * S)))
+                canvas.alpha_composite(tint(bar, c), (int((cx - 1) * S), int((cy + 3.5) * S)))
+            cx += adv
     return cx
+
+
+def sh_bar(bar, st, c):
+    if "shadow_color" in st:
+        sc = st["shadow_color"] & 0xFFFFFFFF
+        return tint(bar, sc & 0xFFFFFF, sc >> 24)
+    return tint(bar, (c & 0xFCFCFC) >> 2)
 
 
 def width(comp):
